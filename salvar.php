@@ -3,7 +3,7 @@
 
     $email = $_POST["emailUsuario"];
     $senha = $_POST['senhaUsuario'];
-  
+
     $sqlCons = "select email from usuario where email = :email";
     $stmtCons = $conn->prepare($sqlCons);
     $stmtCons->bindValue(':email', $email);
@@ -21,6 +21,8 @@
 
         if ($stmt->execute()) {
             echo "<p style='color:green;'>Usuário cadastrado com sucesso!</p>";
+            header("Location: TelaInicial.php");
+            exit;
         } else {
             echo "<p style='color:red;'>Erro ao cadastrar usuário.</p>";
         }
