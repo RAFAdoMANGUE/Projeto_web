@@ -6,12 +6,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+   
+    <div class='palavra' id='palavra'>TESTE</div>
+       
     <div class="caixa-jogo">
         <h1>jogo da explosao</h1>
 
         <div class="info-jogo">
-            Pontos: <span id="pontos">0</span> |
-            Tempo: <span id="tempo">60</span> s |
+            Pontos: <span id="pontos">0</span> 
+            Tempo: <span id="tempo">60</span> 
             Vidas: <span id="vidas">3</span>
         </div>
 
@@ -23,7 +26,7 @@
         <button type="button" class="botao" id="botao-enviar">OK</button>
 
         <div style="margin-top: 10px;">
-            <button type="button" class="botao" id="botao-iniciar">Iniciar</button>
+            <button onclick="mover()" class="botao" id="botao-iniciar" >Iniciar</button>
             <button type="button" class="botao" id="botao-reiniciar">Reiniciar</button>
         </div>
 
@@ -34,7 +37,7 @@
         </div>
     </div>
 
-    
+     <script src="jogo.js"></script>
     <!-- <script src="jogo.js"></script> -->
 </body>
 </html>
