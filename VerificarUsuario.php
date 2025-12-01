@@ -1,7 +1,6 @@
 <?php
 require 'connection.php';
 
-
     $jogarEmail = $_POST['emailUsuario'];
     $jogarSenha = $_POST['senhaUsuario'];
 
