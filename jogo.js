@@ -6,6 +6,7 @@ let posx= 10;
 let posy= 100;
 let speed= 5;
 let teste = 'TESTE';
+let pontos = 0;
 function mover() {     
 
     let resposta = document.getElementById("entrada-palavra").value;
@@ -25,6 +26,7 @@ function mover() {
         console.log(teste);
     }
     if(resposta == teste){
+        pontos += 1;
          endGame();
     }
     
@@ -33,3 +35,4 @@ function mover() {
 function endGame(){
     window.location.href = "jogo.php";
 }
+
