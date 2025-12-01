@@ -1,45 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Explosive Word - Jogo</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Jogo da explosao</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="caixa-jogo">
-    <h1>Explosive Word</h1>
+    <div class="caixa-jogo">
+        <h1>jogo da explosao</h1>
 
-    <!-- informacoes principais do jogo -->
-    <div class="info-jogo">
-      <div>Pontuação: <strong id="pontos">0</strong></div>
-      <div>Tempo: <strong id="tempo">60</strong> s</div>
-      <div>Vidas: <strong id="vidas">3</strong></div>
+        <div class="info-jogo">
+            Pontos: <span id="pontos">0</span> |
+            Tempo: <span id="tempo">60</span> s |
+            Vidas: <span id="vidas">3</span>
+        </div>
+
+        <p>Palavra atual:</p>
+        <p><strong id="palavra-atual">exemplo</strong></p>
+
+        <input type="text" id="entrada-palavra" placeholder="Digite aqui...">
+        <br>
+        <button type="button" class="botao" id="botao-enviar">OK</button>
+
+        <div style="margin-top: 10px;">
+            <button type="button" class="botao" id="botao-iniciar">Iniciar</button>
+            <button type="button" class="botao" id="botao-reiniciar">Reiniciar</button>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <a href="historico.php" class="botao-link">Histórico</a>
+            <a href="placar.php" class="botao-link">Placar</a>
+            <a href="TelaInicial.php" class="botao-link">Sair</a>
+        </div>
     </div>
 
-    <!-- area onde as palavras vao aparecer com Javascript -->
-    <div class="area-jogo" id="area-jogo">
-      As palavras do jogo aparecem aqui.
-    </div>
-
-    <!-- campo para digitar a palavra e botao para iniciar -->
-    <div class="linha-input">
-      <input
-        type="text"
-        id="entrada-palavra"
-        placeholder="Digite a palavra aqui"
-        autocomplete="off"
-      >
-      <button type="button" id="botao-iniciar">Iniciar</button>
-    </div>
-
-    <!-- links -->
-    <div class="texto-menor" style="margin-top: 16px;">
-      <a href="historico.php">Historico de partidas</a> |
-      <a href="placar.php">Placar geral e ligas</a> |
-      <a href="TelaInicial.php">Sair</a>
-    </div>
-  </div>
-
-  <!-- <script src="jogo.js"></script> AINDA NAO TEM-->
+    
+    <!-- <script src="jogo.js"></script> -->
 </body>
 </html>

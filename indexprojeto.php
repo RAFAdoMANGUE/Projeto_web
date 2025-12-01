@@ -1,29 +1,27 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>mario gomes</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Cadastro - jogo da explosao</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="acesso">
-    <h1>palavra explosiva</h1>
-    <h2>Cadastro</h2>
+    <div class="caixa">
+        <h1>Cadastro</h1>
 
-    <!-- cadastro -->
-    <form action="salvar.php" method="POST">
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="emailUsuario" required>
+        <form action="salvar.php" method="POST">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="emailUsuario" required>
 
-      <label for="senha">Senha</label>
-      <input type="password" id="senha" name="senhaUsuario" required>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senhaUsuario" required>
 
-      <button type="submit">Enviar</button>
-    </form>
+            <button type="submit" class="botao">Cadastrar</button>
+        </form>
 
-    <div class="texto-menor">
-      Já tem conta?
-      <a href="TelaInicial.php">Faça login</a>
+        <div>
+            <a href="TelaInicial.php" class="botao-link">Ir para Login</a>
+        </div>
     </div>
-  </div>
 </body>
 </html>

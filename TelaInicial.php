@@ -1,64 +1,27 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>joguinho explosivo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class = 'login'>
-        <h1>Jogo de digitação do Mario</h1>
+    <div class="caixa">
+        <h1>Login</h1>
+
         <form action="VerificarUsuario.php" method="POST">
-        <h2>Faça seu login para jogar<h2>
-        <br></br>
-        <label>email</label>
-        <input type="email" name="emailUsuario">
-        <label>senha</label>
-        <input type="password" name="senhaUsuario">
+            <label for="emailLogin">E-mail</label>
+            <input type="email" id="emailLogin" name="emailUsuario" required>
 
-        <button type ='submit'>Jogar</button>
-        <button type='button' onclick='FuncChamarRegistro()'>registrar</button>
+            <label for="senhaLogin">Senha</label>
+            <input type="password" id="senhaLogin" name="senhaUsuario" required>
+
+            <button type="submit" class="botao">Entrar</button>
+        </form>
+
+        <div>
+            <a href="indexprojeto.php" class="botao-link">Cadastrar</a>
         </div>
-
-        <script>
-            function FuncChamarRegistro() {
-                window.location.href='indexprojeto.php';
-            }
-        </script>
+    </div>
 </body>
 </html>
-
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Explosive Word - Login</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="login">
-    <h1>Explosive Word</h1>
-    <h2>Login</h2>
-
-    <!-- login -->
-    <form action="VerificarUsuario.php" method="POST">
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="emailUsuario" required>
-
-      <label for="senha">Senha</label>
-      <input type="password" id="senha" name="senhaUsuario" required>
-
-      <button type="submit">Jogar</button>
-      <button type="button" onclick="FuncChamarRegistro()">Registrar</button>
-    </form>
-  </div>
-
-  <script>
-    function FuncChamarRegistro() {
-      window.location.href = 'indexprojeto.php';
-    }
-  </script>
-</body>
-</html>
-
