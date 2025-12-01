@@ -1,0 +1,33 @@
+
+body{
+    display: flex;
+    background-color: purple;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /*centraliza o conteudo na tela*/
+    margin: 0;
+}
+.acesso{
+    text-align: center;
+    background-color: violet;
+    padding: 100px;
+    font-size: 20px;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+
+}
+button{
+    width: 100px;
+    padding: 10px;
+    background-color: slateblue;
+
+}
+button:hover{
+    background-color: cyan;
+}
