@@ -7,7 +7,7 @@
 </head>
 <body>
    
-    <div class='palavra' id='palavra'>TESTE</div>
+    <div class='palavra' id='palavra'></div>
        
     <div class="caixa-jogo">
         <h1>jogo da explosao</h1>
@@ -26,7 +26,7 @@
         <button type="button" class="botao" id="botao-enviar">OK</button>
 
         <div style="margin-top: 10px;">
-            <button onclick="mover()" class="botao" id="botao-iniciar" >Iniciar</button>
+            <button onclick="StartGame()" class="botao" id="botao-iniciar" >Iniciar</button>
             <button type="button" class="botao" id="botao-reiniciar">Reiniciar</button>
         </div>
 
