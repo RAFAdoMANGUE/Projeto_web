@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <title>Detalhes da Liga</title>
+    <title>Liga</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
@@ -76,7 +76,7 @@
         }
 
         .tabela-jogadores td.nome-jogador {
-            text-align: left; 
+            text-align: center; 
         }
 
         .acoes {
@@ -100,16 +100,9 @@
 <body>
     <div class="caixa">
         <h1>Detalhes da Liga</h1>
-
        
         <label for="nomeLiga">Nome da liga</label>
-        <input
-            type="text"
-            id="nomeLiga"
-            name="nomeLiga"
-            value="LIGA X"
-            readonly
-        />
+  
         <div class="campo">
             
         </div>
@@ -118,8 +111,9 @@
             <thead>
                 <tr>
                     <th>Nome do jogador</th>
-                    <th>Partidas jogadas</th>
+                    <th>Partidas semanais</th>
                     <th>Pontuação semanal</th>
+                    <th>Partidas totais</th>
                     <th>Pontuação total</th>
                 </tr>
             </thead>
@@ -130,18 +124,21 @@
                     <td>5</td>
                     <td>30</td>
                     <td>120</td>
+                    <td>120</td>
                 </tr>
                 <tr>
                     <td class="nome-jogador">Jogador 2</td>
                     <td>3</td>
                     <td>15</td>
                     <td>60</td>
+                    <td>120</td>
                 </tr>
                 <tr>
                     <td class="nome-jogador">Jogador 3</td>
                     <td>7</td>
                     <td>40</td>
                     <td>200</td>
+                    <td>120</td>
                 </tr>
             </tbody>
         </table>
