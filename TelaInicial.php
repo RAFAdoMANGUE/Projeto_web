@@ -15,13 +15,11 @@
 
             <label for="senhaLogin">Senha</label>
             <input type="password" id="senhaLogin" name="senhaUsuario" required>
-
-            <button type="submit" class="botao">Entrar</button>
+                <div class="clique">
+                    <a href="indexprojeto.php" class="entrar">Entrar</a>
+                    <button type="submit" class="cadastrar">Cadastrar</button>
+                </div>
         </form>
-
-        <div>
-            <a href="indexprojeto.php" class="botao-link">Cadastrar</a>
-        </div>
     </div>
 </body>
 </html>

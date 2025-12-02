@@ -40,27 +40,30 @@ body {
     padding: 5px;
     margin-top: 3px;
     font-size: 14px;
-}
-
-.botao {
-    margin-top: 10px;
-    padding: 6px 10px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-/* link com cara de botão */
-.botao-link {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 6px 10px;
-    font-size: 14px;
-    background: #dddddd;
     border: 1px solid #000;
-    text-decoration: none;
-    color: #000;
-    cursor: pointer;
+    box-sizing: border-box;
 }
+
+.clique {
+margin-top: 12px;
+display: flex;
+justify-content: space-between;
+gap: 6px;
+        }
+
+.clique .entrar,
+.clique .cadastrar  { 
+        flex: 1;                   
+        padding: 6px 10px;
+        font-size: 14px;
+        background: #dddddd;
+        border: 1px solid #000;
+        color: #000;
+        margin-top: 12px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;     
+        }
 
 .caixa-jogo {
     background: #ffffff;
