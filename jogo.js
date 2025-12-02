@@ -29,6 +29,7 @@ let palavras = [
   "frase","fruta","fumaca","funcao","galo","garrafa","gato","gelado","gelo","girassol",
   "giz","globo","goiaba","gota","grama"
 ];
+
 function StartGame(){
     if(start){
         document.getElementById("palavra-atual").textContent = 
@@ -43,7 +44,6 @@ function StartGame(){
 }
 
 function mover() {    
-    
 
     let resposta = document.getElementById("entrada-palavra").value;
     let palavraAtual = document.getElementById("palavra-atual");
@@ -69,6 +69,7 @@ function mover() {
     }
     
 }
+
 function Correct(){
     document.getElementById("palavra-atual").textContent = 
     palavras[Math.floor(Math.random() * palavras.length)];
@@ -80,6 +81,7 @@ function Correct(){
     document.getElementById("entrada-palavra").value = '';
     speed = speed*1.1;
 }
+
 function endGame(){
     window.location.href = "jogo.php";
 }
