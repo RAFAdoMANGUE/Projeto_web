@@ -82,19 +82,21 @@
         .acoes {
             margin-top: 12px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
         }
 
-        .acoes .botao-voltar {
-            padding: 6px 10px;
+        .botao-next,
+        .botao-link {
+            padding: 6px 16px;
             font-size: 14px;
             background: #dddddd;
             border: 1px solid #000;
             color: #000;
             text-decoration: none;
             cursor: pointer;
-            text-align: center;
+            display: inline-block;
         }
+
     </style>
 </head>
 <body>
@@ -144,8 +146,8 @@
         </table>
 
         <div class="acoes">
-           
-            <a href="#" class="botao-voltar">Voltar</a>
+                <a href="#" class="botao-link">Voltar</a>
+                <button type="submit" class="botao-next">Próximo</button>
         </div>
     </div>
 </body>
