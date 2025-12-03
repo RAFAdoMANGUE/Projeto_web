@@ -81,6 +81,8 @@ gap: 6px;
 .palavra {
     width: 30px;
     padding: 30px;
-    background-color: red;
+    border: 3px solid greenyellow;
+    background-color: purple;
+    color: red;
     position: absolute;
 }

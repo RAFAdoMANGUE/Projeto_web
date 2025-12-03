@@ -54,7 +54,7 @@ function mover() {
     console.log(palavraAtual);
     requestAnimationFrame(mover); 
 
-    if(posx + 85 >= window.innerWidth){
+    if(posx + 100 >= window.innerWidth){
         intVida -= 1;
         vidas.textContent = intVida;
         posx = 10;
