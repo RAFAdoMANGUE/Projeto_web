@@ -27,7 +27,9 @@ let palavras = [
   "estrela","estudo","exemplo","experiencia","faca","familia","fantasia","farol","feira","festa",
   "figura","filme","foco","fogo","folha","fome","fonte","forma","forte","foto",
   "frase","fruta","fumaca","funcao","galo","garrafa","gato","gelado","gelo","girassol",
-  "giz","globo","goiaba","gota","grama"
+  "giz","globo","goiaba","gota","grama","vietna","goiabinha","ameixa-seca","tupi","ferro",
+  "pau","vulcao","ovo","vina","penal",
+  "amarelo","sorte","virgem","pecado"
 ];
 
 function StartGame(){
