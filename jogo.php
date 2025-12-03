@@ -14,7 +14,7 @@
 
         <div class="info-jogo">
             Pontos: <span id="pontos">0</span> 
-            Tempo: <span id="tempo">60</span> 
+            Tempo: <span id="tempo">0</span> 
             Vidas: <span id="vidas">3</span>
         </div>
 
