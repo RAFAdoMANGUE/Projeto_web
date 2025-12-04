@@ -1,23 +1,45 @@
 let box = document.getElementById("palavra");
 let vida = document.getElementById("vidas");
+let intPontos = 0;
+let tempo = 0;
 box.style.position = "absolute"; 
-let intVida = 50;
+let intVida = 3; 
+
+let boxObjeto = document.getElementById("objetoBomba");
+boxObjeto.style.position = "absolute";
+
+let Bomba = {
+    posxO : 10,
+    posyO : 0,
+    speedO : 0.3,
+    perguntaO: "",
+    palavraCaixaO: "",
+    ativo: false,
+    spawn: [10,50,100,110,130,160,190,210,240,280,300,340,400,500,550,600,650,700,750,800,850,900],
+    respostaO: ""
+}
+
 let posx= 10;
 let posy= 100;
-let speed= 5;
+
+let speed= 3;
 let speeda = true;
 let speedb = true;
 let speedc = true;
 let speede = true;
 let speedf = true;
+
 let pergunta;
 let start = true;
-let intPontos = 0;
-let tempo = 0;
+
 let pontos = document.getElementById("pontos");
 let palavraCaixa = document.getElementById("palavra");
+
 let somCorrect = new Audio("sound/Correct.wav");
 let music = new Audio("sound/Music.wav");
+
+let ultimaPontuacao = 0;
+
 let palavras = [
   "abelha","academia","acender","aceitar","achar",
   "acordo","acucar","adivinha","aguia","alegria","amarelo","amigo","amor",
@@ -42,22 +64,29 @@ let palavras = [
 
 function StartGame(){
     if(start){
-        document.getElementById("palavra-atual").textContent = 
-        palavras[Math.floor(Math.random() * palavras.length)];
+        Bomba.posyO = 0;
+        boxObjeto.style.top = Bomba.posyO + "px";
 
-        document.getElementById("palavra").textContent = 
-        document.getElementById("palavra-atual").textContent;
+        document.getElementById("palavra-atual").textContent = 
+            palavras[Math.floor(Math.random() * palavras.length)];
+
+        document.getElementById("objetoBomba").textContent = 
+            palavras[Math.floor(Math.random() * palavras.length)];
+
         mover();
         music.loop = true;
-        music.volume = 0.3;
+        music.volume = 0.0;
         music.play();
+
         start = false;
     }
+
     setInterval(() => {
         tempo++;
         console.log("Tempo:", tempo);
     }, 1000); 
- 
+
+    setInterval(Objeto, 5000);
 }
 
 function mover() {    
@@ -66,12 +95,27 @@ function mover() {
     let resposta = document.getElementById("entrada-palavra").value;
     let palavraAtual = document.getElementById("palavra-atual");
     pergunta = palavraAtual.textContent;
+
+    Bomba.respostaO = document.getElementById("entrada-palavra").value;
+    Bomba.perguntaO = document.getElementById("objetoBomba").textContent;
+
     posx += speed;
     box.style.left = posx + "px";
-    console.log(tempo);
-    console.log(speed);
+
+    if(Bomba.ativo){
+        Bomba.posyO += Bomba.speedO;
+        boxObjeto.style.top = Bomba.posyO + "px";
+    }
 
     requestAnimationFrame(mover); 
+
+    if(Bomba.posyO + 70 >= window.innerHeight){
+        intVida -= 1;
+        vidas.textContent = intVida;
+        Bomba.posyO = 0;
+        boxObjeto.style.top = "0px";
+        Bomba.ativo = false;
+    }
 
     if(posx + 100 >= window.innerWidth){
         intVida -= 1;
@@ -79,20 +123,24 @@ function mover() {
         posx = 10;
         box.style.left = "10px";
     }
+
     if(intVida <= 0){
         endGame();
-        console.log(teste);
     }
+
     if(resposta == pergunta){
          Correct();
     }
-    
+
+    if(resposta == Bomba.perguntaO){
+        ObjectCorrect();
+    }
 }
 
 function Correct(){
     document.getElementById("palavra-atual").textContent = 
-    palavras[Math.floor(Math.random() * palavras.length)];
-    document.getElementById("palavra").textContent = document.getElementById("palavra-atual").textContent;
+        palavras[Math.floor(Math.random() * palavras.length)];
+
     if(tempo <= 10){
         intPontos += 1;
     }
@@ -103,22 +151,21 @@ function Correct(){
         }
         speeda = false;
     }
-     if(tempo > 20 && tempo <= 30){
+    if(tempo > 20 && tempo <= 30){
         intPontos = intPontos + 4;
         if(speedb){
             speed = speed + 3;
         }
         speedb = false;
     }
-     if(tempo > 30 && tempo <= 40){
+    if(tempo > 30 && tempo <= 40){
         intPontos = intPontos + 6;
         if(speedc){
             speed = speed + 4;
         }
         speedc = false;
     }
-    
-     if(tempo > 40 && tempo <= 50){
+    if(tempo > 40 && tempo <= 50){
         intPontos = intPontos + 8;
         if(speede){
             speed = speed + 5;
@@ -132,6 +179,7 @@ function Correct(){
         }
         speedf = false;
     }
+    
     pontos.textContent = intPontos;
     posx = 10;
     box.style.left = "10px";
@@ -139,11 +187,104 @@ function Correct(){
     somCorrect.play();
 }
 
-function endGame(){
+function ObjectCorrect(){
+    document.getElementById("objetoBomba").textContent = 
+        palavras[Math.floor(Math.random() * palavras.length)];
 
-    window.location.href = "jogo.php";
+    document.getElementById("entrada-palavra").value = '';
+
+    if(tempo <= 10){
+        intPontos += 1;
+    }
+    if(tempo > 10 && tempo <= 20){
+        intPontos = intPontos + 2;
+    }
+    if(tempo > 20 && tempo <= 30){
+        intPontos = intPontos + 4;
+    }
+    if(tempo > 30 && tempo <= 40){
+        intPontos = intPontos + 6;
+    }
+    if(tempo > 40 && tempo <= 50){
+        intPontos = intPontos + 8;
+    }
+    if(tempo > 50){
+        intPontos = intPontos + 10;
+    }
+
+    pontos.textContent = intPontos;
+
+    Bomba.posyO = 0;
+    boxObjeto.style.top = "0px";
+
+    somCorrect.play();
+}
+
+function endGame() {
+    ultimaPontuacao = intPontos;
+
+    alert("Fim de jogo! Você fez " + ultimaPontuacao + " pontos.");
+
+    const btnSalvar = document.getElementById("botao-salvar");
+    if (btnSalvar) {
+        btnSalvar.disabled = false;
+    }
+
+    tempo = 0;
+    document.getElementById("tempo").textContent = tempo;
+
+    intVida = 3;
+    document.getElementById("vidas").textContent = intVida;
+
+    intPontos = 0;
+    pontos.textContent = intPontos;
+
+    posx = 10;
+    box.style.left = posx + "px";
+
+    Bomba.posyO = 0;
+    Bomba.speedO = 0.3;
+    boxObjeto.style.top = "0px";
+    Bomba.ativo = false;
+
+    document.getElementById("entrada-palavra").value = '';
+
+    document.getElementById("palavra-atual").textContent = "exemplo";
+    document.getElementById("objetoBomba").textContent = "teste";
+
+    start = true;
+}
+
+function salvarPontos() {
+    if (ultimaPontuacao <= 0) {
+        alert("Nenhuma pontuação para salvar. Jogue uma partida primeiro.");
+        return;
+    }
+
+    fetch('salvarpontos.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'pontos=' + encodeURIComponent(ultimaPontuacao)
+    })
+    .then(response => response.text())
+    .then(text => {
+        alert(text); 
+        const btnSalvar = document.getElementById("botao-salvar");
+        if (btnSalvar) {
+            btnSalvar.disabled = true; 
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao salvar pontos:', error);
+        alert('Erro ao salvar pontuação. Veja o console.');
+    });
 }
 
 function Objeto(){
-
-}
+    let index = Math.floor(Math.random() * Bomba.spawn.length);
+    Bomba.posxO = Bomba.spawn[index];
+    boxObjeto.style.left = Bomba.posxO + "px";
+    Bomba.ativo = true;
+}   

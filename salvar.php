@@ -3,6 +3,7 @@
 
     $email = $_POST["emailUsuario"];
     $senha = $_POST['senhaUsuario'];
+    $nickname = $_POST['nickname'];
 
     $sqlCons = "select email from usuario where email = :email";
     $stmtCons = $conn->prepare($sqlCons);
@@ -14,10 +15,11 @@
     }
     else{
 
-        $sql = "INSERT INTO usuario (email, senha) VALUES (:email, :senha)";
+        $sql = "INSERT INTO usuario (email, senha, nickname) VALUES (:email, :senha, :nickname)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':senha', $senha);
+        $stmt->bindParam(':nickname',$nickname);
 
         if ($stmt->execute()) {
             echo "<p style='color:green;'>Usuário cadastrado com sucesso!</p>";

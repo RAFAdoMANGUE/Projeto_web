@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   
+    <div class='objetoBomba' id='objetoBomba'>teste</div>
     <div class='palavra' id='palavra'></div>
        
     <div class="caixa-jogo">
@@ -25,12 +26,13 @@
         <br>
 
         <div style="margin-top: 10px;">
-            <button onclick="StartGame()" class="botao" id="botao-iniciar" >Iniciar</button>
-            <button onclick="endGame()" class="botao" id="botao-reiniciar">Reiniciar</button>
+            <button onclick="StartGame()" class="botao" id="botao-iniciar">Iniciar</button>
+            <button onclick="endGame()" class="botao" id="botao-reiniciar">Encerrar jogo</button>
+            <button onclick="salvarPontos()" class="botao" id="botao-salvar" disabled>Salvar pontos</button>
             <a href="home.php"><button type="button" class="botao" id="botao-sair">Sair</button></a>
         </div>
     </div>
 
-     <script src="jogo.js"></script>
+    <script src="jogo.js"></script>
 </body>
 </html>

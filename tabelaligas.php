@@ -22,18 +22,18 @@
             <tbody>
                 <tr>
                   <tr>
-                    <td><a href="#">Nome da Liga 1</a></td>
+                    <td><a href="liga.php">Nome da Liga 1</a></td>
                     <td class="centro">0</td>
                     <td class="centro">0</td>
                 </tr>
                 </tr>
                 <tr>
-                    <td><a href="#">Nome da Liga 2</a></td>
+                    <td><a href="liga.php">Nome da Liga 2</a></td>
                     <td class="centro">0</td>
                     <td class="centro">0</td>
                 </tr>
                 <tr>
-                    <td><a href="#">Nome da Liga 3</a></td>
+                    <td><a href="liga.php">Nome da Liga 3</a></td>
                     <td class="centro">0</td>
                     <td class="centro">0</td>
                 </tr>

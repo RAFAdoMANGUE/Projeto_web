@@ -1,20 +1,31 @@
 <?php
 require 'connection.php';
 
-    $jogarEmail = $_POST['emailUsuario'];
-    $jogarSenha = $_POST['senhaUsuario'];
+$jogarEmail = $_POST['emailUsuario'];
+$jogarSenha = $_POST['senhaUsuario'];
 
-    $sqlConsJogar = 'select email from usuario where email = :email AND senha= :senha';
+$sqlConsJogar = '
+    SELECT id, email, nickname 
+    FROM usuario 
+    WHERE email = :email 
+      AND senha = :senha
+';
 
-    $stmtConsJogar = $conn ->prepare($sqlConsJogar);
-    $stmtConsJogar->bindValue(':email', $jogarEmail);
-    $stmtConsJogar->bindValue(':senha', $jogarSenha);
-    $stmtConsJogar->execute();
-    $user= $stmtConsJogar->fetch(PDO::FETCH_ASSOC);
-    if($user){
-         header("Location: home.php");
-         exit;
-    } 
-    else{
-        echo'login invalido';
-    }
+$stmt = $conn->prepare($sqlConsJogar);
+$stmt->bindValue(':email', $jogarEmail);
+$stmt->bindValue(':senha', $jogarSenha);
+$stmt->execute();
+
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($user) {
+
+    $nickname = $user['nickname'];
+    setcookie("jogador", $nickname, time() + 3600, "/");
+    $_SESSION['id_usuario'] = $user['id'];
+    header("Location: home.php");
+    exit;
+} 
+else {
+    echo 'login invalido';
+}

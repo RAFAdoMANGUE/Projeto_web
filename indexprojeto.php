@@ -13,8 +13,10 @@
             <label for="email">E-mail</label>
             <input type="email" id="email" name="emailUsuario" required>
 
-            <label for="senha">Senha</label>
-            <input type="password" id="senha" name="senhaUsuario" required>
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senhaUsuario" required>
+            <label for="nickname">nickname</label>
+            <input type="text" id="nickname" name="nickname" required>
 
             <button type="submit" class="botao">Cadastrar</button>
         </form>

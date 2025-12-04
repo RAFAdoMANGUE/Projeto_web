@@ -53,7 +53,7 @@
         </table>
 
         <div class="acoesliga">
-                <a href="#" class="botao-liga">Voltar</a>
+                <a href="tabelaligas.php" class="botao-liga">Voltar</a>
         </div>
     </div>
 </body>
