@@ -15,7 +15,7 @@ let Bomba = {
     perguntaO: "",
     palavraCaixaO: "",
     ativo: false,
-    spawn: [10,50,100,110,130,160,190,210,240,280,300,340,400,500,550,600,650,700,750,800,850,900],
+    spawn: [10,50,100,110,130,160,190,210,240,280,300,340,400,500,550,600,650,700,750,800,850,900,1000],
     respostaO: ""
 }
 
@@ -161,21 +161,21 @@ function Correct(){
     if(tempo > 30 && tempo <= 40){
         intPontos = intPontos + 6;
         if(speedc){
-            speed = speed + 4;
+            speed = speed + 3;
         }
         speedc = false;
     }
     if(tempo > 40 && tempo <= 50){
         intPontos = intPontos + 8;
         if(speede){
-            speed = speed + 5;
+            speed = speed + 1;
         }
         speede  = false;
     }
     if(tempo > 50){
         intPontos = intPontos + 10;
         if(speedf){
-            speed = speed + 5;
+            speed = speed + 1;
         }
         speedf = false;
     }
