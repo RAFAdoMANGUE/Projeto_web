@@ -1,10 +1,23 @@
+<?php
+    require 'connection.php';
+
+$sql = "
+    SELECT jogador, pontos FROM pontuacao ORDER BY pontos DESC
+";
+
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$ranking = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
     <title>Pontuação geral</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
+
+    <style>
         body {
             margin: 0;
             padding: 0;
@@ -47,6 +60,10 @@
             text-align: center;
         }
 
+        .centro {
+            text-align: center;
+        }
+
         .acoes {
             margin-top: 12px;
             display: flex;
@@ -64,10 +81,6 @@
             cursor: pointer;
             display: inline-block;
         }
-
-        .centro {
-    text-align: center;
-}
     </style>
 </head>
 <body>
@@ -78,31 +91,36 @@
             <thead>
                 <tr>
                     <th>Ranking</th>
+                    <th>Jogador</th>
                     <th>Pontuação</th>
                 </tr>
             </thead>
 
-            <tbody>
-                <tr>
-                  <tr>
-                    <td class="centro">1</td>
-                    <td class="centro">0</td>
-                </tr>
-                </tr>
-                <tr>
-                    <td class="centro">2</td>
-                    <td class="centro">0</td>
-                </tr>
-                <tr>
-                    <td class="centro">3</td>
-                    <td class="centro">0</td>
-                </tr>
+           <tbody>
+            <?php
+            if (empty($ranking)) {
+                // Nenhum resultado encontrado
+                echo '<tr><td colspan="3" class="centro">Nenhuma pontuação encontrada</td></tr>';
+            } else {
+                $posicao = 1;
+                foreach ($ranking as $linha):
+            ?>
+                    <tr>
+                        <td class="centro"><?= $posicao ?></td>
+                        <td class="centro"><?= htmlspecialchars($linha["jogador"]) ?></td>
+                        <td class="centro"><?= $linha["pontos"] ?></td>
+                    </tr>
+            <?php
+                    $posicao++;
+                endforeach;
+            }
+            ?>
             </tbody>
+
         </table>
 
         <div class="acoes">
-                <a href="#" class="botao-link">Voltar</a>
-                <button type="submit" class="botao-next">Próximo</button>
+            <a href="home.php" class="botao-link">Voltar</a>
         </div>
     </div>
 </body>

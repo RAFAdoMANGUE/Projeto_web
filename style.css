@@ -86,3 +86,121 @@ gap: 6px;
     color: red;
     position: absolute;
 }
+
+        .caixacadastro {
+            background: #ffffff;
+            border: 1px solid #000;
+            padding: 20px;
+            width: 320px;
+            box-sizing: border-box;
+            text-align: left;          
+        }
+
+        .caixacadastro h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;        
+        }
+
+        .caixacadastro label {
+            display: block;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .caixacadastro input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-top: 3px;
+            font-size: 14px;
+            border: 1px solid #000;
+            box-sizing: border-box;    
+        }
+       
+        .dica-campo {
+            font-size: 12px;
+            color: #555;
+            margin-top: 2px;
+        }
+       
+  
+
+.caixalig {
+            background: #ffffff;
+            border: 1px solid #000;
+            padding: 20px;
+            width: 600px;             
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .caixalig h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .caixalig label {
+            display: block;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .caixalig input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-top: 3px;
+            font-size: 14px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+        }
+
+        .campo {
+            font-size: 12px;
+            color: #555;
+            margin-top: 2px;
+        }
+
+        .tabela-jogadores {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .tabela-jogadores th,
+        .tabela-jogadores td {
+            border: 1px solid #000;
+            padding: 6px 8px;
+        }
+
+        .tabela-jogadores th {
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .tabela-jogadores td {
+            text-align: center;
+        }
+
+        .tabela-jogadores td.nome-jogador {
+            text-align: center; 
+        }
+
+        .acoes {
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .acoes .botao-next,
+        .acoes .botao-link {
+            padding: 6px 16px;
+            font-size: 14px;
+            background: #dddddd;
+            border: 1px solid #000;
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+        }        

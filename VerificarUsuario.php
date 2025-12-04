@@ -12,7 +12,7 @@ require 'connection.php';
     $stmtConsJogar->execute();
     $user= $stmtConsJogar->fetch(PDO::FETCH_ASSOC);
     if($user){
-         header("Location: index.html");
+         header("Location: home.php");
          exit;
     } 
     else{

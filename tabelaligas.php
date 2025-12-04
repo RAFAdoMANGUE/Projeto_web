@@ -2,9 +2,10 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <title>Historico</title>
+    <title>Tabela de Ligas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
+
+    <style>
         body {
             margin: 0;
             padding: 0;
@@ -31,20 +32,32 @@
             margin-bottom: 15px;
         }
 
-        .tabela-historico {
+        .tabela-liga {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
         }
 
-        .tabela-historico th,
-        .tabela-historico td {
+        .tabela-liga th,
+        .tabela-liga td {
             border: 1px solid #000;
             padding: 6px 8px;
+            text-align: center;
         }
 
-        .tabela-historico th {
+        .tabela-liga th {
+            background: #ffffff;
+            color: #000;
             text-align: center;
+        }
+
+        .tabela-liga a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .tabela-liga a:hover {
+            text-decoration: underline;
         }
 
         .acoes {
@@ -72,42 +85,41 @@
 </head>
 <body>
     <div class="caixa">
-        <h1>Histórico</h1>
+        <h1>Tabela Ligas</h1>
 
-        <table class="tabela-historico">
+        <table class="tabela-liga">
             <thead>
                 <tr>
-                    <th>Ranking</th>
+                    <th>Liga</th>
+                    <th>Partidas</th>
                     <th>Pontuação</th>
-                    <th>Data</th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
                   <tr>
-                    <td class="centro">1</td>
+                    <td><a href="#">Nome da Liga 1</a></td>
                     <td class="centro">0</td>
-                    <td class="centro">24/05/2025</td>
+                    <td class="centro">0</td>
                 </tr>
-                </tr>
-                <tr>
-                    <td class="centro">2</td>
-                    <td class="centro">0</td>
-                    <td class="centro">0</td>
                 </tr>
                 <tr>
-                    <td class="centro">3</td>
+                    <td><a href="#">Nome da Liga 2</a></td>
+                    <td class="centro">0</td>
+                    <td class="centro">0</td>
+                </tr>
+                <tr>
+                    <td><a href="#">Nome da Liga 3</a></td>
                     <td class="centro">0</td>
                     <td class="centro">0</td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="acoes">
-            <a href="#" class="botao-link">Voltar</a>
-            <button type="submit" class="botao-next">Próximo</button>
-        </div>
+         <div class="acoes">
+            <a href="home.php" class="botao-link">Voltar</a>
+         </div>
     </div>
 </body>
 </html>

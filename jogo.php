@@ -23,17 +23,11 @@
 
         <input type="text" id="entrada-palavra" placeholder="Digite aqui...">
         <br>
-        <button type="button" class="botao" id="botao-enviar">OK</button>
 
         <div style="margin-top: 10px;">
             <button onclick="StartGame()" class="botao" id="botao-iniciar" >Iniciar</button>
             <button type="button" class="botao" id="botao-reiniciar">Reiniciar</button>
-        </div>
-
-        <div style="margin-top: 10px;">
-            <a href="historico.php" class="botao-link">Histórico</a>
-            <a href="placar.php" class="botao-link">Placar</a>
-            <a href="TelaInicial.php" class="botao-link">Sair</a>
+            <a href="home.php"><button type="button" class="botao" id="botao-sair">Sair</button></a>
         </div>
     </div>
 

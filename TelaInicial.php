@@ -16,8 +16,8 @@
             <label for="senhaLogin">Senha</label>
             <input type="password" id="senhaLogin" name="senhaUsuario" required>
                 <div class="clique">
-                    <a href="indexprojeto.php" class="entrar">Entrar</a>
-                    <button type="submit" class="cadastrar">Cadastrar</button>
+                    <a href="indexprojeto.php" class="cadastrar">Cadastrar</a>
+                    <button type="submit" class="entrar">Entrar</button>
                 </div>
         </form>
     </div>
