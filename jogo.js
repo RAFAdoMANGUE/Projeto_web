@@ -11,17 +11,18 @@ boxObjeto.style.position = "absolute";
 let Bomba = {
     posxO : 10,
     posyO : 0,
-    speedO : 1,
+    speedO : 0.3,
     perguntaO: "",
     palavraCaixaO: "",
     ativo: false,
-    spawn: [10,20,30,40,50,60,70,80,90,100,110]
+    spawn: [10,50,100,110,130,160,190,210,240,280,300,340,400,500,550,600,650,700,750,800,850,900],
+    respostaO: ""
 }
 
 let posx= 10;
 let posy= 100;
 
-let speed= 5;
+let speed= 3;
 let speeda = true;
 let speedb = true;
 let speedc = true;
@@ -64,13 +65,18 @@ function StartGame(){
     if(start){
         Bomba.posyO = 0;
         boxObjeto.style.top = Bomba.posyO + "px";
+
         document.getElementById("palavra-atual").textContent = 
         palavras[Math.floor(Math.random() * palavras.length)];
+
+        document.getElementById("objetoBomba").textContent = 
+        palavras[Math.floor(Math.random() * palavras.length)];
+
         /*document.getElementById("palavra").textContent = 
         document.getElementById("palavra-atual").textContent;*/
         mover();
         music.loop = true;
-        music.volume = 0.3;
+        music.volume = 0.0;
         music.play();
 
 
@@ -80,7 +86,7 @@ function StartGame(){
         tempo++;
         console.log("Tempo:", tempo);
     }, 1000); 
-    
+
     setInterval(Objeto, 5000);
  
 }
@@ -92,6 +98,9 @@ function mover() {
     let palavraAtual = document.getElementById("palavra-atual");
     pergunta = palavraAtual.textContent;
 
+    Bomba.respostaO = document.getElementById("entrada-palavra").value;
+    Bomba.perguntaO = document.getElementById("objetoBomba").textContent;
+    
     
 
     posx += speed;
@@ -109,6 +118,7 @@ function mover() {
         vidas.textContent = intVida;
         Bomba.posyO = 0;
         boxObjeto.style.top = "0px";
+        Bomba.ativo = false;
     }
 
     if(posx + 100 >= window.innerWidth){
@@ -123,6 +133,10 @@ function mover() {
     }
     if(resposta == pergunta){
          Correct();
+    }
+
+    if(resposta == Bomba.perguntaO){
+        ObjectCorrect();
     }
     
 }
@@ -178,6 +192,38 @@ function Correct(){
     posx = 10;
     box.style.left = "10px";
     document.getElementById("entrada-palavra").value = '';
+    somCorrect.play();
+}
+function ObjectCorrect(){
+    
+    document.getElementById("objetoBomba").textContent = 
+    palavras[Math.floor(Math.random() * palavras.length)];
+
+    document.getElementById("entrada-palavra").value = '';
+
+     if(tempo <= 10){
+        intPontos += 1;
+    }
+    if(tempo > 10 && tempo <= 20){
+        intPontos = intPontos + 2;
+    }
+     if(tempo > 20 && tempo <= 30){
+        intPontos = intPontos + 4;
+    }
+    if(tempo > 30 && tempo <= 40){
+        intPontos = intPontos + 6;
+    }
+    if(tempo > 40 && tempo <= 50){
+        intPontos = intPontos + 8;
+    }
+    if(tempo > 50){
+        intPontos = intPontos + 10;
+    }
+    pontos.textContent = intPontos;
+
+    Bomba.posyO = 0;
+    boxObjeto.style.top = "0px";
+
     somCorrect.play();
 }
 
