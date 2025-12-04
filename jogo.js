@@ -17,6 +17,7 @@ let tempo = 0;
 let pontos = document.getElementById("pontos");
 let palavraCaixa = document.getElementById("palavra");
 let somCorrect = new Audio("sound/Correct.wav");
+let music = new Audio("sound/Music.wav");
 let palavras = [
   "abelha","academia","acender","aceitar","achar",
   "acordo","acucar","adivinha","aguia","alegria","amarelo","amigo","amor",
@@ -47,6 +48,9 @@ function StartGame(){
         document.getElementById("palavra").textContent = 
         document.getElementById("palavra-atual").textContent;
         mover();
+        music.loop = true;
+        music.volume = 0.3;
+        music.play();
         start = false;
     }
     setInterval(() => {
@@ -57,7 +61,6 @@ function StartGame(){
 }
 
 function mover() {    
-    
     document.getElementById("tempo").textContent = tempo;
 
     let resposta = document.getElementById("entrada-palavra").value;
@@ -137,6 +140,7 @@ function Correct(){
 }
 
 function endGame(){
+
     window.location.href = "jogo.php";
 }
 

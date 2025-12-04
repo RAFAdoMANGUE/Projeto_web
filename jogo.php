@@ -26,12 +26,11 @@
 
         <div style="margin-top: 10px;">
             <button onclick="StartGame()" class="botao" id="botao-iniciar" >Iniciar</button>
-            <button type="button" class="botao" id="botao-reiniciar">Reiniciar</button>
+            <button onclick="endGame()" class="botao" id="botao-reiniciar">Reiniciar</button>
             <a href="home.php"><button type="button" class="botao" id="botao-sair">Sair</button></a>
         </div>
     </div>
 
      <script src="jogo.js"></script>
-    <!-- <script src="jogo.js"></script> -->
 </body>
 </html>
