@@ -15,76 +15,12 @@ $ranking = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8" />
     <title>Pontuação geral</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #ccccff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .caixa {
-            background: #ffffff;
-            border: 1px solid #000;
-            padding: 20px;
-            width: 600px;
-            box-sizing: border-box;
-            text-align: left;
-        }
-
-        .caixa h1 {
-            font-size: 20px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .tabela-pontuacao {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        .tabela-pontuacao th,
-        .tabela-pontuacao td {
-            border: 1px solid #000;
-            padding: 6px 8px;
-        }
-
-        .tabela-pontuacao th {
-            text-align: center;
-        }
-
-        .centro {
-            text-align: center;
-        }
-
-        .acoes {
-            margin-top: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .botao-next,
-        .botao-link {
-            padding: 6px 16px;
-            font-size: 14px;
-            background: #dddddd;
-            border: 1px solid #000;
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-            display: inline-block;
-        }
-    </style>
 </head>
+
 <body>
-    <div class="caixa">
+    <div class="caixar">
         <h1>Pontuação geral</h1>
 
         <table class="tabela-pontuacao">
@@ -119,8 +55,8 @@ $ranking = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         </table>
 
-        <div class="acoes">
-            <a href="home.php" class="botao-link">Voltar</a>
+        <div class="acoesliga">
+            <a href="home.php" class="botao-liga">Voltar</a>
         </div>
     </div>
 </body>

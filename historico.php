@@ -3,75 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>Historico</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #ccccff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .caixa {
-            background: #ffffff;
-            border: 1px solid #000;
-            padding: 20px;
-            width: 600px;
-            box-sizing: border-box;
-            text-align: left;
-        }
-
-        .caixa h1 {
-            font-size: 20px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .tabela-historico {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        .tabela-historico th,
-        .tabela-historico td {
-            border: 1px solid #000;
-            padding: 6px 8px;
-        }
-
-        .tabela-historico th {
-            text-align: center;
-        }
-
-        .acoes {
-            margin-top: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .botao-next,
-        .botao-link {
-            padding: 6px 16px;
-            font-size: 14px;
-            background: #dddddd;
-            border: 1px solid #000;
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .centro {
-    text-align: center;
-}
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="caixa">
+    <div class="caixas">
         <h1>Histórico</h1>
 
         <table class="tabela-historico">
@@ -85,11 +20,9 @@
 
             <tbody>
                 <tr>
-                  <tr>
                     <td class="centro">1</td>
                     <td class="centro">0</td>
                     <td class="centro">24/05/2025</td>
-                </tr>
                 </tr>
                 <tr>
                     <td class="centro">2</td>
@@ -104,9 +37,9 @@
             </tbody>
         </table>
 
-        <div class="acoes">
-            <a href="home.php" class="botao-link">Voltar</a>
-           </div>
+        <div class="acoesliga">
+            <a href="home.php" class="botao-liga">Voltar</a>
+        </div>
     </div>
 </body>
 </html>

@@ -52,9 +52,8 @@
             </tbody>
         </table>
 
-        <div class="acoes">
-                <a href="#" class="botao-link">Voltar</a>
-                <button type="submit" class="botao-next">Próximo</button>
+        <div class="acoesliga">
+                <a href="#" class="botao-liga">Voltar</a>
         </div>
     </div>
 </body>

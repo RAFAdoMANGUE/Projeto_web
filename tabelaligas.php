@@ -3,88 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>Tabela de Ligas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #ccccff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .caixa {
-            background: #ffffff;
-            border: 1px solid #000;
-            padding: 20px;
-            width: 600px;
-            box-sizing: border-box;
-            text-align: left;
-        }
-
-        .caixa h1 {
-            font-size: 20px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .tabela-liga {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        .tabela-liga th,
-        .tabela-liga td {
-            border: 1px solid #000;
-            padding: 6px 8px;
-            text-align: center;
-        }
-
-        .tabela-liga th {
-            background: #ffffff;
-            color: #000;
-            text-align: center;
-        }
-
-        .tabela-liga a {
-            color: #000;
-            text-decoration: none;
-        }
-
-        .tabela-liga a:hover {
-            text-decoration: underline;
-        }
-
-        .acoes {
-            margin-top: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .botao-next,
-        .botao-link {
-            padding: 6px 16px;
-            font-size: 14px;
-            background: #dddddd;
-            border: 1px solid #000;
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .centro {
-    text-align: center;
-}
-    </style>
 </head>
 <body>
-    <div class="caixa">
+    <div class="caixam">
         <h1>Tabela Ligas</h1>
 
         <table class="tabela-liga">
@@ -117,8 +40,8 @@
             </tbody>
         </table>
 
-         <div class="acoes">
-            <a href="home.php" class="botao-link">Voltar</a>
+         <div class="acoesliga">
+            <a href="home.php" class="botao-liga">Voltar</a>
          </div>
     </div>
 </body>
