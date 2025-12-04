@@ -1,23 +1,43 @@
 let box = document.getElementById("palavra");
 let vida = document.getElementById("vidas");
+let intPontos = 0;
+let tempo = 0;
 box.style.position = "absolute"; 
 let intVida = 50;
+
+let boxObjeto = document.getElementById("objetoBomba");
+boxObjeto.style.position = "absolute";
+
+let Bomba = {
+    posxO : 10,
+    posyO : 0,
+    speedO : 1,
+    perguntaO: "",
+    palavraCaixaO: "",
+    ativo: false,
+    spawn: [10,20,30,40,50,60,70,80,90,100,110]
+}
+
 let posx= 10;
 let posy= 100;
+
 let speed= 5;
 let speeda = true;
 let speedb = true;
 let speedc = true;
 let speede = true;
 let speedf = true;
+
 let pergunta;
 let start = true;
-let intPontos = 0;
-let tempo = 0;
+
 let pontos = document.getElementById("pontos");
 let palavraCaixa = document.getElementById("palavra");
+
 let somCorrect = new Audio("sound/Correct.wav");
 let music = new Audio("sound/Music.wav");
+
+
 let palavras = [
   "abelha","academia","acender","aceitar","achar",
   "acordo","acucar","adivinha","aguia","alegria","amarelo","amigo","amor",
@@ -42,21 +62,26 @@ let palavras = [
 
 function StartGame(){
     if(start){
+        Bomba.posyO = 0;
+        boxObjeto.style.top = Bomba.posyO + "px";
         document.getElementById("palavra-atual").textContent = 
         palavras[Math.floor(Math.random() * palavras.length)];
-
-        document.getElementById("palavra").textContent = 
-        document.getElementById("palavra-atual").textContent;
+        /*document.getElementById("palavra").textContent = 
+        document.getElementById("palavra-atual").textContent;*/
         mover();
         music.loop = true;
         music.volume = 0.3;
         music.play();
+
+
         start = false;
     }
     setInterval(() => {
         tempo++;
         console.log("Tempo:", tempo);
     }, 1000); 
+    
+    setInterval(Objeto, 5000);
  
 }
 
@@ -66,12 +91,25 @@ function mover() {
     let resposta = document.getElementById("entrada-palavra").value;
     let palavraAtual = document.getElementById("palavra-atual");
     pergunta = palavraAtual.textContent;
+
+    
+
     posx += speed;
     box.style.left = posx + "px";
-    console.log(tempo);
-    console.log(speed);
+
+    if(Bomba.ativo){
+        Bomba.posyO += Bomba.speedO;
+        boxObjeto.style.top = Bomba.posyO + "px";
+    }
 
     requestAnimationFrame(mover); 
+
+    if(Bomba.posyO + 70 >= window.innerHeight){
+        intVida -= 1;
+        vidas.textContent = intVida;
+        Bomba.posyO = 0;
+        boxObjeto.style.top = "0px";
+    }
 
     if(posx + 100 >= window.innerWidth){
         intVida -= 1;
@@ -92,7 +130,10 @@ function mover() {
 function Correct(){
     document.getElementById("palavra-atual").textContent = 
     palavras[Math.floor(Math.random() * palavras.length)];
-    document.getElementById("palavra").textContent = document.getElementById("palavra-atual").textContent;
+    /*
+    document.getElementById("palavra").textContent = 
+    document.getElementById("palavra-atual").textContent; */
+
     if(tempo <= 10){
         intPontos += 1;
     }
@@ -132,6 +173,7 @@ function Correct(){
         }
         speedf = false;
     }
+    
     pontos.textContent = intPontos;
     posx = 10;
     box.style.left = "10px";
@@ -140,10 +182,13 @@ function Correct(){
 }
 
 function endGame(){
-
     window.location.href = "jogo.php";
 }
 
 function Objeto(){
+    let index = Math.floor(Math.random() * Bomba.spawn.length);
+    Bomba.posxO = Bomba.spawn[index];
+    boxObjeto.style.left = Bomba.posxO + "px";
+    Bomba.ativo = true;
+}   
 
-}

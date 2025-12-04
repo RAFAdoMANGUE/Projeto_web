@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   
+    <div class='objetoBomba' id='objetoBomba'></div>
     <div class='palavra' id='palavra'></div>
        
     <div class="caixa-jogo">

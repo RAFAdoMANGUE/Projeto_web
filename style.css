@@ -83,6 +83,18 @@ gap: 6px;
     padding: 30px;
     border: 3px solid greenyellow;
     background-color: purple;
+    background-image: url("img/dynamite.jfif");
+    background-size: contain;    
+    color: red;
+    position: absolute;
+}
+.objetoBomba {
+    width: 30px;
+    padding: 30px;
+    border: 3px solid greenyellow;
+    background-color: purple;
+    background-image: url("img/dynamite.jfif");
+    background-size: contain;    
     color: red;
     position: absolute;
 }
