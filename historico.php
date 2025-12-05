@@ -1,3 +1,33 @@
+<?php
+session_start();
+if (!isset($_SESSION['id_usuario'])) {
+    header("Location: TelaInicial.php");
+    exit;
+}
+
+require 'connection.php';
+
+$idUsuario = (int) $_SESSION['id_usuario'];
+
+$sql = "
+    SELECT 
+        p.pontos,
+        p.tempo_restante,
+        p.vidas_restantes,
+        p.data_partida,
+        l.nome AS nome_liga
+    FROM partida p
+    JOIN usuario u ON p.id_usuario = u.id
+    LEFT JOIN liga l ON u.id_liga = l.id
+    WHERE p.id_usuario = :id_usuario
+    ORDER BY p.data_partida DESC
+";
+
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(':id_usuario', $idUsuario, PDO::PARAM_INT);
+$stmt->execute();
+$partidas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

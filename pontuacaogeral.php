@@ -1,8 +1,20 @@
 <?php
+session_start();
+if (!isset($_SESSION['id_usuario'])) {
+    header("Location: TelaInicial.php");
+    exit;
+}
     require 'connection.php';
 
 $sql = "
-    SELECT jogador, pontos FROM pontuacao ORDER BY pontos DESC
+    SELECT 
+        u.nickname AS jogador,
+        COALESCE(l.nome, '') AS liga,
+        p.pontos
+    FROM pontuacao p
+    JOIN usuario u ON p.id_usuario = u.id
+    LEFT JOIN liga l ON u.id_liga = l.id
+    ORDER BY p.pontos DESC
 ";
 
 $stmt = $conn->prepare($sql);

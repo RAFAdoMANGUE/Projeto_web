@@ -261,7 +261,7 @@ function salvarPontos() {
         return;
     }
 
-    fetch('salvarpontos.php', {
+    fetch('salvarPontos.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
