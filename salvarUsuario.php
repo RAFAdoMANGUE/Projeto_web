@@ -10,10 +10,27 @@
         exit;
     }
 
-    $sqlCons = "select email from usuario where email = :email";
+    $sqlCons = "select email, nickname from usuario where email = :email";
     $stmtCons = $conn->prepare($sqlCons);
     $stmtCons->bindValue(':email', $email);
+    $stmt->bindValue(':nickname', $nickname);
     $stmtCons->execute();
+
+    $usuarioExistente = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($usuarioExistente) {
+
+        if ($usuarioExistente['email'] === $email) {
+            header("Location: cadastroUsuario.php?erro=email");
+            exit;
+        }
+
+        if ($usuarioExistente['nickname'] === $nickname) {
+            header("Location: cadastroUsuario.php?erro=nickname");
+            exit;
+        }
+    }
+
     $row = $stmtCons->fetch(PDO::FETCH_ASSOC);
 
     if($row){

@@ -272,6 +272,9 @@ function salvarPontos() {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: 'pontos=' + encodeURIComponent(ultimaPontuacao)
+        + '&tempo_restante=' + encodeURIComponent(tempo)
+        + '&vidas_restantes=' + encodeURIComponent(intVida)
+
     })
     
     .then(response => response.text())
