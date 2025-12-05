@@ -4,11 +4,10 @@
     <meta charset="UTF-8" />
     <title>Tabela de Ligas</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
     <div class="caixam">
-        <h1>Tabela Ligas</h1>
+        <h1>Tabela de Ligas</h1>
 
         <table class="tabela-liga">
             <thead>
@@ -21,17 +20,17 @@
 
             <tbody>
                 <tr>
-                  <tr>
                     <td><a href="liga.php">Nome da Liga 1</a></td>
                     <td class="centro">0</td>
                     <td class="centro">0</td>
                 </tr>
-                </tr>
+
                 <tr>
                     <td><a href="liga.php">Nome da Liga 2</a></td>
                     <td class="centro">0</td>
                     <td class="centro">0</td>
                 </tr>
+
                 <tr>
                     <td><a href="liga.php">Nome da Liga 3</a></td>
                     <td class="centro">0</td>
@@ -40,9 +39,9 @@
             </tbody>
         </table>
 
-         <div class="acoesliga">
+        <div class="acoesliga">
             <a href="home.php" class="botao-liga">Voltar</a>
-         </div>
+        </div>
     </div>
 </body>
 </html>

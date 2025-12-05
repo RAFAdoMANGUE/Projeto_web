@@ -77,6 +77,15 @@ gap: 6px;
     margin-bottom: 10px;
     font-size: 14px;
 }
+.botoes{
+    margin-top: 10px;
+}
+.botao{
+    background-color: aquamarine;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+}
 
 .palavra {
     width: 30px;
