@@ -76,7 +76,7 @@ function StartGame(){
 
         mover();
         music.loop = true;
-        music.volume = 0.0;
+        music.volume = 0.2;
         music.play();
 
         start = false;
