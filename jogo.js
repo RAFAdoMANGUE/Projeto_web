@@ -3,7 +3,7 @@ let vida = document.getElementById("vidas");
 let intPontos = 0;
 let tempo = 0;
 box.style.position = "absolute"; 
-let intVida = 3; 
+let intVida = 1; 
 
 let boxObjeto = document.getElementById("objetoBomba");
 boxObjeto.style.position = "absolute";
@@ -37,6 +37,7 @@ let palavraCaixa = document.getElementById("palavra");
 
 let somCorrect = new Audio("sound/Correct.wav");
 let music = new Audio("sound/Music.wav");
+let explosion = new Audio("sound/Explosion.wav");
 
 let ultimaPontuacao = 0;
 
@@ -54,10 +55,10 @@ let palavras = [
   "cuidado","culpa","curioso","danca","dedo","dente","desafio","desenho","deserto","destino",
   "detalhe","dia","doce","dor","duelo","eco","educacao","efeito","energia",
   "enigma","entrada", "escada","escola","escrita","escuro","espada","espelho","esporte",
-  "estrela","estudo","exemplo","experiencia","faca","familia","fantasia","farol","feira","festa",
+  "estrela","estudo","exemplo","experiencia","faca","familia","farol","feira","festa",
   "figura","filme","foco","fogo","folha","fome","fonte","forma","forte","foto",
   "frase","fruta","fumaca","funcao","galo","garrafa","gato","gelado","gelo","girassol",
-  "giz","globo","goiaba","gota","grama","vietna","goiabinha","ameixa-seca","tupi","ferro",
+  "giz","globo","goiaba","gota","grama","vietna","ameixa-seca","tupi","ferro",
   "pau","vulcao","ovo","vina","penal",
   "amarelo","sorte","virgem","pecado","loiras"
 ];
@@ -125,7 +126,9 @@ function mover() {
     }
 
     if(intVida <= 0){
+        
         endGame();
+        salvarPontos()
     }
 
     if(resposta == pergunta){
@@ -216,12 +219,12 @@ function ObjectCorrect(){
 
     Bomba.posyO = 0;
     boxObjeto.style.top = "0px";
-
     somCorrect.play();
 }
 
 function endGame() {
     ultimaPontuacao = intPontos;
+    explosion.play();
 
     alert("Fim de jogo! Você fez " + ultimaPontuacao + " pontos.");
 
@@ -253,6 +256,7 @@ function endGame() {
     document.getElementById("objetoBomba").textContent = "teste";
 
     start = true;
+
 }
 
 function salvarPontos() {
@@ -268,6 +272,7 @@ function salvarPontos() {
         },
         body: 'pontos=' + encodeURIComponent(ultimaPontuacao)
     })
+    
     .then(response => response.text())
     .then(text => {
         alert(text); 
