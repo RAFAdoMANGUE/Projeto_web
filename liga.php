@@ -1,3 +1,22 @@
+<?php
+require 'connection.php';
+
+$id = $_GET['id'] ?? null;
+if (!$id) {
+    die("Liga inválida");
+}
+
+$sql = "SELECT nome, descricao FROM liga WHERE id = :id";
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(':id', $id);
+$stmt->execute();
+$liga = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$liga) {
+    die("Liga não encontrada");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,10 +29,12 @@
     <div class="caixalig">
         <h1>Detalhes da Liga</h1>
        
-        <label for="nomeLiga">Nome da liga</label>
+        <h2><?= htmlspecialchars($liga['nome']) ?></h2>
+
+        <?php if ($liga['descricao']): ?>
+            <p><?= htmlspecialchars($liga['descricao']) ?></p>
+        <?php endif; ?>
   
-        <div class="campo">
-            
         </div>
 
         <table class="tabela-jogadores">

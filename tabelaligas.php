@@ -1,3 +1,11 @@
+<?php
+require 'connection.php';
+
+$sql = "SELECT id, nome FROM liga ORDER BY criada_em DESC";
+$stmt = $conn->query($sql);
+$ligas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,43 +13,19 @@
     <title>Tabela de Ligas</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="caixam">
-        <h1>Tabela de Ligas</h1>
-
-        <table class="tabela-liga">
-            <thead>
-                <tr>
-                    <th>Liga</th>
-                    <th>Partidas</th>
-                    <th>Pontuação</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td><a href="liga.php">Nome da Liga 1</a></td>
-                    <td class="centro">0</td>
-                    <td class="centro">0</td>
-                </tr>
-
-                <tr>
-                    <td><a href="liga.php">Nome da Liga 2</a></td>
-                    <td class="centro">0</td>
-                    <td class="centro">0</td>
-                </tr>
-
-                <tr>
-                    <td><a href="liga.php">Nome da Liga 3</a></td>
-                    <td class="centro">0</td>
-                    <td class="centro">0</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="acoesliga">
-            <a href="home.php" class="botao-liga">Voltar</a>
-        </div>
-    </div>
-</body>
+<tbody>
+<?php if (empty($ligas)): ?>
+    <tr>
+        <td colspan="3" class="centro">Nenhuma liga cadastrada.</td>
+    </tr>
+<?php else: ?>
+    <?php foreach ($ligas as $l): ?>
+        <tr>
+            <td><a href="liga.php?id=<?= $l['id'] ?>"><?= htmlspecialchars($l['nome']) ?></a></td>
+            <td class="centro">0</td>
+            <td class="centro">0</td>
+        </tr>
+    <?php endforeach; ?>
+<?php endif; ?>
+</tbody>
 </html>

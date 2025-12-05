@@ -27,7 +27,7 @@ if (!isset($_SESSION['id_usuario'])) {
                 <li><b><a href="cadastroliga.php">Cadastrar liga</a></b></li>
             </ul>
             <ul>
-                <li><b><a href="tabelaligas.php">Tabela liga</a></b></li>
+                <li><b><a href="tabelaLigas.php">Tabela liga</a></b></li>
             </ul>
             <ul>
                 <li><b><a href="historico.php">Historico de jogos</a></b></li>
