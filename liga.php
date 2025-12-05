@@ -31,15 +31,37 @@ if ($idUsuario) {
     $usuarioNaLiga = ((int)$idLigaUsuario === $idLiga);
 }
 
-// participantes da liga (cada jogador só pode ter 1 id_liga)
+// participantes da liga com pontuação geral e semanal
+// - pontos_geral: soma de todas as partidas desde data_entrada_liga
+// - pontos_semana: soma das partidas desde data_entrada_liga E nos últimos 7 dias
 $sqlParticipantes = "
     SELECT 
         u.nickname,
-        COALESCE(p.pontos, 0) AS pontos
+        COALESCE(
+            SUM(
+                CASE 
+                    WHEN p.data_partida >= u.data_entrada_liga 
+                    THEN p.pontos 
+                    ELSE 0 
+                END
+            ), 0
+        ) AS pontos_geral,
+        COALESCE(
+            SUM(
+                CASE 
+                    WHEN p.data_partida >= u.data_entrada_liga
+                         AND p.data_partida >= (CURRENT_DATE - INTERVAL '7 days')
+                    THEN p.pontos 
+                    ELSE 0 
+                END
+            ), 0
+        ) AS pontos_semana
     FROM usuario u
-    LEFT JOIN pontuacao p ON p.id_usuario = u.id
+    LEFT JOIN partida p 
+           ON p.id_usuario = u.id
     WHERE u.id_liga = :id_liga
-    ORDER BY pontos DESC, u.nickname ASC
+    GROUP BY u.id, u.nickname, u.data_entrada_liga
+    ORDER BY pontos_geral DESC, pontos_semana DESC, u.nickname ASC
 ";
 $stmtPart = $conn->prepare($sqlParticipantes);
 $stmtPart->bindValue(':id_liga', $idLiga, PDO::PARAM_INT);
@@ -99,7 +121,8 @@ $participantes = $stmtPart->fetchAll(PDO::FETCH_ASSOC);
                 <tr>
                     <th>Posição</th>
                     <th>Jogador</th>
-                    <th>Pontuação</th>
+                    <th>Pontuação geral</th>
+                    <th>Pontuação semanal</th>
                 </tr>
             </thead>
             <tbody>
@@ -108,7 +131,8 @@ $participantes = $stmtPart->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <td class="centro"><?= $pos ?></td>
                         <td class="centro"><?= htmlspecialchars($p['nickname']) ?></td>
-                        <td class="centro"><?= (int)$p['pontos'] ?></td>
+                        <td class="centro"><?= (int)$p['pontos_geral'] ?></td>
+                        <td class="centro"><?= (int)$p['pontos_semana'] ?></td>
                     </tr>
                     <?php $pos++; ?>
                 <?php endforeach; ?>

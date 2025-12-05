@@ -6,11 +6,10 @@ $user = 'postgres';
 $password = 'admin';
 
 try {
-    // Conexão no banco padrão "postgres" para criar o Projeto_final
+    // Conecta no banco 'postgres' para criar o Projeto_final se não existir
     $pdoAdmin = new PDO("pgsql:host=$host;port=$port;dbname=postgres;", $user, $password);
     $pdoAdmin->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Cria o banco Projeto_final (se não existir)
     try {
         $sqlCreateDb = 'CREATE DATABASE "Projeto_final"';
         $pdoAdmin->exec($sqlCreateDb);
@@ -27,7 +26,7 @@ try {
     $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Tabela LIGA
+    // Tabela liga
     $sqlLiga = "
         CREATE TABLE IF NOT EXISTS liga (
             id SERIAL PRIMARY KEY,
@@ -39,7 +38,7 @@ try {
     $pdo->exec($sqlLiga);
     echo "Tabela 'liga' criada.<br>";
 
-    // Tabela USUARIO
+    // Tabela usuario (já com data_entrada_liga)
     $sqlUsuario = "
         CREATE TABLE IF NOT EXISTS usuario (
             id SERIAL PRIMARY KEY,
@@ -48,6 +47,7 @@ try {
             criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             id_liga INT NULL,
             nickname VARCHAR(100) NOT NULL UNIQUE,
+            data_entrada_liga TIMESTAMP NULL,
             CONSTRAINT fk_usuario_liga
                 FOREIGN KEY (id_liga)
                 REFERENCES liga(id)
@@ -57,7 +57,23 @@ try {
     $pdo->exec($sqlUsuario);
     echo "Tabela 'usuario' criada.<br>";
 
-    // Tabela PARTIDA (já com id_liga)
+    // Garante que a coluna data_entrada_liga exista
+    $sqlCheckDataEntrada = "
+        SELECT 1
+        FROM information_schema.columns
+        WHERE table_name = 'usuario'
+          AND column_name = 'data_entrada_liga';
+    ";
+    $stmtCheckDataEntrada = $pdo->query($sqlCheckDataEntrada);
+    $colDataEntradaExiste = $stmtCheckDataEntrada->fetchColumn();
+
+    if (!$colDataEntradaExiste) {
+        $sqlAddDataEntrada = "ALTER TABLE usuario ADD COLUMN data_entrada_liga TIMESTAMP NULL;";
+        $pdo->exec($sqlAddDataEntrada);
+        echo "Coluna 'data_entrada_liga' adicionada à tabela 'usuario'.<br>";
+    }
+
+    // Tabela partida
     $sqlPartida = "
         CREATE TABLE IF NOT EXISTS partida (
             id SERIAL PRIMARY KEY,
@@ -76,7 +92,7 @@ try {
     $pdo->exec($sqlPartida);
     echo "Tabela 'partida' criada.<br>";
 
-    // Garante que a coluna id_liga exista em 'partida' (caso a tabela seja antiga)
+    // Garante que a coluna id_liga exista em partida
     $sqlCheckCol = "
         SELECT 1
         FROM information_schema.columns
@@ -87,13 +103,12 @@ try {
     $colExiste = $stmtCheckCol->fetchColumn();
 
     if (!$colExiste) {
-        // Adiciona a coluna se não existir
         $sqlAddCol = "ALTER TABLE partida ADD COLUMN id_liga INT NULL;";
         $pdo->exec($sqlAddCol);
         echo "Coluna 'id_liga' adicionada à tabela 'partida'.<br>";
     }
 
-    // Garante a FK de partida.id_liga -> liga(id), se ainda não existir
+    // Garante que a FK de partida -> liga exista
     $sqlCheckFk = "
         SELECT 1
         FROM information_schema.table_constraints
@@ -116,7 +131,7 @@ try {
         echo "Constraint 'fk_partida_liga' criada na tabela 'partida'.<br>";
     }
 
-    // Tabela PONTUACAO
+    // Tabela pontuacao
     $sqlPontuacao = "
         CREATE TABLE IF NOT EXISTS pontuacao (
             id SERIAL PRIMARY KEY,

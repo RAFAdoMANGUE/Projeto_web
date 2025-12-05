@@ -131,7 +131,7 @@ function mover() {
     if (intVida <= 0 && !gameOver) {
         gameOver = true;
         endGame();
-        salvarPontos();
+        salvarPontos(true);
     }
 
     if(resposta == pergunta){
@@ -238,33 +238,46 @@ function endGame() {
     }
 }
 
-function salvarPontos() {
+function salvarPontos(recarregar = false) {
     if (ultimaPontuacao <= 0) {
         alert("Nenhuma pontuação para salvar. Jogue uma partida primeiro.");
         return;
     }
+
+    const body = new URLSearchParams();
+    body.append('pontos', ultimaPontuacao);
+    body.append('tempo_restante', tempo);
+    body.append('vidas_restantes', intVida);
 
     fetch('salvarPontos.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: 'pontos=' + encodeURIComponent(ultimaPontuacao)
-            + '&tempo_restante=' + encodeURIComponent(tempo)
-            + '&vidas_restantes=' + encodeURIComponent(intVida)
-
+        body: body.toString()
     })
-    .then(response => response.text())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('HTTP ' + response.status);
+        }
+        return response.text();
+    })
     .then(text => {
+        console.log('Resposta salvarPontos:', text);
         alert(text); 
         const btnSalvar = document.getElementById("botao-salvar");
         if (btnSalvar) {
             btnSalvar.disabled = true; 
         }
+
+        // se chamado com salvarPontos(true), recarrega o jogo depois de salvar
+        if (recarregar) {
+            window.location.href = "jogo.php";
+        }
     })
     .catch(error => {
         console.error('Erro ao salvar pontos:', error);
-        alert('Erro ao salvar pontuação. Veja o console.');
+        alert('Não foi possível salvar a pontuação. Tente novamente.');
     });
 }
 

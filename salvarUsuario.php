@@ -46,11 +46,10 @@ $sql = "INSERT INTO usuario (email, senha, nickname)
         VALUES (:email, :senha, :nickname)";
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':email', $email);
-$stmt->bindParam(':senha', $senha);      // depois a gente troca pra password_hash
+$stmt->bindParam(':senha', $senha); 
 $stmt->bindParam(':nickname', $nickname);
 
 if ($stmt->execute()) {
-    // NÃO redireciona mais: mostra mensagem + botão
     ?>
     <!DOCTYPE html>
     <html lang="pt-BR">
