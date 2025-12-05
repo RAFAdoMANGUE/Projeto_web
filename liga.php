@@ -30,6 +30,21 @@ if ($idUsuario) {
     $idLigaUsuario = $stmtUser->fetchColumn();
     $usuarioNaLiga = ((int)$idLigaUsuario === $idLiga);
 }
+
+// participantes da liga (cada jogador só pode ter 1 id_liga)
+$sqlParticipantes = "
+    SELECT 
+        u.nickname,
+        COALESCE(p.pontos, 0) AS pontos
+    FROM usuario u
+    LEFT JOIN pontuacao p ON p.id_usuario = u.id
+    WHERE u.id_liga = :id_liga
+    ORDER BY pontos DESC, u.nickname ASC
+";
+$stmtPart = $conn->prepare($sqlParticipantes);
+$stmtPart->bindValue(':id_liga', $idLiga, PDO::PARAM_INT);
+$stmtPart->execute();
+$participantes = $stmtPart->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -38,8 +53,7 @@ if ($idUsuario) {
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css">
     <title>Liga</title>
-
-
+</head>
 <body>
 <div class="caixalig">
     <h1>Detalhes da Liga</h1>
@@ -53,13 +67,13 @@ if ($idUsuario) {
     <?php if ($idUsuario): ?>
         <div class="acoesliga">
             <?php if ($usuarioNaLiga): ?>
-                
+                <p>Você está participando desta liga.</p>
                 <form action="sairLiga.php" method="POST" style="display:inline;">
                     <input type="hidden" name="id_liga" value="<?= $liga['id'] ?>">
                     <button type="submit" class="botao-liga">Sair da liga</button>
                 </form>
             <?php else: ?>
-                
+                <p>Você ainda não está participando desta liga.</p>
                 <form action="entrarLiga.php" method="POST" style="display:inline;">
                     <input type="hidden" name="id_liga" value="<?= $liga['id'] ?>">
                     <button type="submit" class="botao-liga">Entrar na liga</button>
@@ -75,5 +89,34 @@ if ($idUsuario) {
         </div>
     <?php endif; ?>
 
+    <hr>
+
+    <h3>Participantes da liga</h3>
+
+    <?php if (!empty($participantes)): ?>
+        <table class="tabela-pontuacao">
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Jogador</th>
+                    <th>Pontuação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $pos = 1; ?>
+                <?php foreach ($participantes as $p): ?>
+                    <tr>
+                        <td class="centro"><?= $pos ?></td>
+                        <td class="centro"><?= htmlspecialchars($p['nickname']) ?></td>
+                        <td class="centro"><?= (int)$p['pontos'] ?></td>
+                    </tr>
+                    <?php $pos++; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p>Nenhum jogador participando desta liga ainda.</p>
+    <?php endif; ?>
+</div>
 </body>
 </html>

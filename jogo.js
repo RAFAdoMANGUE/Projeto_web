@@ -4,6 +4,7 @@ let intPontos = 0;
 let tempo = 0;
 box.style.position = "absolute"; 
 let intVida = 3; 
+let gameOver = false;
 
 let boxObjeto = document.getElementById("objetoBomba");
 boxObjeto.style.position = "absolute";
@@ -90,7 +91,9 @@ function StartGame(){
     setInterval(Objeto, 5000);
 }
 
-function mover() {    
+function mover() { 
+    if (gameOver) return;
+    
     document.getElementById("tempo").textContent = tempo;
 
     let resposta = document.getElementById("entrada-palavra").value;
@@ -112,7 +115,7 @@ function mover() {
 
     if(Bomba.posyO + 70 >= window.innerHeight){
         intVida -= 1;
-        vidas.textContent = intVida;
+        vida.textContent = intVida;
         Bomba.posyO = 0;
         boxObjeto.style.top = "0px";
         Bomba.ativo = false;
@@ -120,15 +123,15 @@ function mover() {
 
     if(posx + 100 >= window.innerWidth){
         intVida -= 1;
-        vidas.textContent = intVida;
+        vida.textContent = intVida;
         posx = 10;
         box.style.left = "10px";
     }
 
-    if(intVida <= 0){
-        
+    if (intVida <= 0 && !gameOver) {
+        gameOver = true;
         endGame();
-        salvarPontos()
+        salvarPontos();
     }
 
     if(resposta == pergunta){
@@ -138,6 +141,7 @@ function mover() {
     if(resposta == Bomba.perguntaO){
         ObjectCorrect();
     }
+
 }
 
 function Correct(){
@@ -232,32 +236,6 @@ function endGame() {
     if (btnSalvar) {
         btnSalvar.disabled = false;
     }
-
-    tempo = 0;
-    document.getElementById("tempo").textContent = tempo;
-
-    intVida = 3;
-    document.getElementById("vidas").textContent = intVida;
-
-    intPontos = 0;
-    pontos.textContent = intPontos;
-
-    posx = 10;
-    box.style.left = posx + "px";
-
-    Bomba.posyO = 0;
-    Bomba.speedO = 0.3;
-    boxObjeto.style.top = "0px";
-    Bomba.ativo = false;
-
-    document.getElementById("entrada-palavra").value = '';
-
-    document.getElementById("palavra-atual").textContent = "exemplo";
-    document.getElementById("objetoBomba").textContent = "teste";
-
-    //start = true;
-    window.location.href = "jogo.php";
-
 }
 
 function salvarPontos() {
@@ -272,11 +250,10 @@ function salvarPontos() {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: 'pontos=' + encodeURIComponent(ultimaPontuacao)
-        + '&tempo_restante=' + encodeURIComponent(tempo)
-        + '&vidas_restantes=' + encodeURIComponent(intVida)
+            + '&tempo_restante=' + encodeURIComponent(tempo)
+            + '&vidas_restantes=' + encodeURIComponent(intVida)
 
     })
-    
     .then(response => response.text())
     .then(text => {
         alert(text); 
@@ -290,6 +267,7 @@ function salvarPontos() {
         alert('Erro ao salvar pontuação. Veja o console.');
     });
 }
+
 
 function Objeto(){
     let index = Math.floor(Math.random() * Bomba.spawn.length);
