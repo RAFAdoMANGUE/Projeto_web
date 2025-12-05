@@ -1,8 +1,14 @@
 <?php
+session_start();
 require 'connection.php';
 
 $jogarEmail = $_POST['emailUsuario'];
 $jogarSenha = $_POST['senhaUsuario'];
+
+if ($jogarEmail === '' || $jogarSenha === '') {
+    header("Location: TelaInicial.php?erro=1");
+    exit;
+}
 
 $sqlConsJogar = '
     SELECT id, email, nickname 
@@ -25,7 +31,8 @@ if ($user) {
     $_SESSION['id_usuario'] = $user['id'];
     header("Location: home.php");
     exit;
-} 
+}
 else {
-    echo 'login invalido';
+    header("Location: TelaInicial.php?erro=1")
+    exit;
 }

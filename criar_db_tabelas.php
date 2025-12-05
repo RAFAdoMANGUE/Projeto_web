@@ -42,6 +42,7 @@ try {
             senha VARCHAR(255) NOT NULL,
             criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             id_liga INT NULL,
+            nickname VARCHAR(100) NOT NULL UNIQUE,
             CONSTRAINT fk_usuario_liga
                 FOREIGN KEY (id_liga)
                 REFERENCES liga(id)
@@ -65,6 +66,22 @@ try {
                 ON DELETE CASCADE
         );
     ";
+
+    $sqlPontuacao = "
+    CREATE TABLE IF NOT EXISTS pontuacao (
+        id SERIAL PRIMARY KEY,
+        id_usuario INT NOT NULL UNIQUE,
+        pontos INT NOT NULL DEFAULT 0,
+        atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT fk_pontuacao_usuario
+            FOREIGN KEY (id_usuario)
+            REFERENCES usuario(id)
+            ON DELETE CASCADE
+    );
+";
+$pdo->exec($sqlPontuacao);
+echo "Tabela 'pontuacao' criada.<br>";
+
     $pdo->exec($sqlPartida);
     echo "Tabela 'partida' criada.<br>";
 
