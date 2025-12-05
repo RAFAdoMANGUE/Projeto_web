@@ -49,21 +49,23 @@ $partidas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </thead>
 
             <tbody>
+            <?php if (empty($partidas)): ?>
                 <tr>
-                    <td class="centro">1</td>
-                    <td class="centro">0</td>
-                    <td class="centro">24/05/2025</td>
+                    <td colspan="3" class="centro">Nenhuma partida encontrada</td>
                 </tr>
-                <tr>
-                    <td class="centro">2</td>
-                    <td class="centro">0</td>
-                    <td class="centro">0</td>
-                </tr>
-                <tr>
-                    <td class="centro">3</td>
-                    <td class="centro">0</td>
-                    <td class="centro">0</td>
-                </tr>
+            <?php else: ?>
+                <?php $i = 1; ?>
+                <?php foreach ($partidas as $p): ?>
+                    <tr>
+                        <td class="centro"><?= $i ?></td>
+                        <td class="centro"><?= (int)$p['pontos'] ?></td>
+                        <td class="centro">
+                            <?= date('d/m/Y H:i', strtotime($p['data_partida'])) ?>
+                        </td>
+                    </tr>
+                    <?php $i++; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
             </tbody>
         </table>
 

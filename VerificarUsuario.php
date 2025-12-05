@@ -33,6 +33,6 @@ if ($user) {
     exit;
 }
 else {
-    header("Location: TelaInicial.php?erro=1")
+    header("Location: TelaInicial.php?erro=1");
     exit;
 }
