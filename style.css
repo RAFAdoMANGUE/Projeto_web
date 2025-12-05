@@ -95,6 +95,7 @@ gap: 6px;
     background-color: purple;
     background-image: url("img/dynamite.jfif");
     background-size: contain;    
+    font-weight: bold;
     color: black;
     position: absolute;
 }

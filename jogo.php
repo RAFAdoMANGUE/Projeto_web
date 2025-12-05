@@ -28,7 +28,7 @@
         <div style="margin-top: 10px;">
             <button onclick="StartGame()" class="botao" id="botao-iniciar">Iniciar</button>
             <button onclick="endGame()" class="botao" id="botao-reiniciar">Encerrar jogo</button>
-        <!--    <button onclick="salvarPontos()" class="botao" id="botao-salvar" disabled>Salvar pontos</button> -->
+        <!-- <button onclick="salvarPontos()" class="botao" id="botao-salvar" disabled>Salvar pontos</button> -->
             <a href="home.php"><button type="button" class="botao" id="botao-sair">Sair</button></a>
         </div>
     </div>

@@ -55,10 +55,10 @@ let palavras = [
   "cuidado","culpa","curioso","danca","dedo","dente","desafio","desenho","deserto","destino",
   "detalhe","dia","doce","dor","duelo","eco","educacao","efeito","energia",
   "enigma","entrada", "escada","escola","escrita","escuro","espada","espelho","esporte",
-  "estrela","estudo","exemplo","experiencia","faca","familia","fantasia","farol","feira","festa",
+  "estrela","estudo","exemplo","experiencia","faca","familia","farol","feira","festa",
   "figura","filme","foco","fogo","folha","fome","fonte","forma","forte","foto",
   "frase","fruta","fumaca","funcao","galo","garrafa","gato","gelado","gelo","girassol",
-  "giz","globo","goiaba","gota","grama","vietna","goiabinha","ameixa-seca","tupi","ferro",
+  "giz","globo","goiaba","gota","grama","vietna","ameixa-seca","tupi","ferro",
   "pau","vulcao","ovo","vina","penal",
   "amarelo","sorte","virgem","pecado","loiras"
 ];
@@ -126,6 +126,7 @@ function mover() {
     }
 
     if(intVida <= 0){
+        
         endGame();
         salvarPontos()
     }
