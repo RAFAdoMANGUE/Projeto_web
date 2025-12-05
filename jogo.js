@@ -255,7 +255,8 @@ function endGame() {
     document.getElementById("palavra-atual").textContent = "exemplo";
     document.getElementById("objetoBomba").textContent = "teste";
 
-    start = true;
+    //start = true;
+    window.location.href = "jogo.php";
 
 }
 
