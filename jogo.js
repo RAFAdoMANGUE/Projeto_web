@@ -3,7 +3,7 @@ let vida = document.getElementById("vidas");
 let intPontos = 0;
 let tempo = 0;
 box.style.position = "absolute"; 
-let intVida = 1; 
+let intVida = 3; 
 
 let boxObjeto = document.getElementById("objetoBomba");
 boxObjeto.style.position = "absolute";
@@ -76,7 +76,7 @@ function StartGame(){
 
         mover();
         music.loop = true;
-        music.volume = 0.0;
+        music.volume = 0.2;
         music.play();
 
         start = false;
