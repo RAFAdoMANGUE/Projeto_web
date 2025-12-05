@@ -6,7 +6,7 @@ $user = 'postgres';
 $password = 'admin';
 
 try {
-    // Conecta no banco 'postgres' para criar o Projeto_final se não existir
+    // conecta no banco 'postgres' para criar o Projeto_final se não existir
     $pdoAdmin = new PDO("pgsql:host=$host;port=$port;dbname=postgres;", $user, $password);
     $pdoAdmin->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -22,11 +22,11 @@ try {
         }
     }
 
-    // Conecta no banco Projeto_final
+    // conecta no banco Projeto_final
     $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Tabela liga
+    // tabela liga
     $sqlLiga = "
         CREATE TABLE IF NOT EXISTS liga (
             id SERIAL PRIMARY KEY,
@@ -38,7 +38,7 @@ try {
     $pdo->exec($sqlLiga);
     echo "Tabela 'liga' criada.<br>";
 
-    // Tabela usuario (já com data_entrada_liga)
+    // tabela usuario
     $sqlUsuario = "
         CREATE TABLE IF NOT EXISTS usuario (
             id SERIAL PRIMARY KEY,
@@ -57,7 +57,7 @@ try {
     $pdo->exec($sqlUsuario);
     echo "Tabela 'usuario' criada.<br>";
 
-    // Garante que a coluna data_entrada_liga exista
+    // coluna data_entrada_liga exista
     $sqlCheckDataEntrada = "
         SELECT 1
         FROM information_schema.columns
@@ -73,7 +73,6 @@ try {
         echo "Coluna 'data_entrada_liga' adicionada à tabela 'usuario'.<br>";
     }
 
-    // Tabela partida
     $sqlPartida = "
         CREATE TABLE IF NOT EXISTS partida (
             id SERIAL PRIMARY KEY,
@@ -92,7 +91,7 @@ try {
     $pdo->exec($sqlPartida);
     echo "Tabela 'partida' criada.<br>";
 
-    // Garante que a coluna id_liga exista em partida
+    // coluna id_liga exista em partida
     $sqlCheckCol = "
         SELECT 1
         FROM information_schema.columns
@@ -108,7 +107,7 @@ try {
         echo "Coluna 'id_liga' adicionada à tabela 'partida'.<br>";
     }
 
-    // Garante que a FK de partida -> liga exista
+    //  FK de partida -> liga exista
     $sqlCheckFk = "
         SELECT 1
         FROM information_schema.table_constraints
@@ -131,7 +130,7 @@ try {
         echo "Constraint 'fk_partida_liga' criada na tabela 'partida'.<br>";
     }
 
-    // Tabela pontuacao
+    // tabela pontuacao
     $sqlPontuacao = "
         CREATE TABLE IF NOT EXISTS pontuacao (
             id SERIAL PRIMARY KEY,

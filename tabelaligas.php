@@ -2,7 +2,7 @@
 session_start();
 require 'connection.php';
 
-// Busca ligas com:
+// busca ligass por:
 // - qtd de jogadores
 // - melhor pontuação geral da liga (soma de partidas desde data_entrada_liga)
 $sql = "
