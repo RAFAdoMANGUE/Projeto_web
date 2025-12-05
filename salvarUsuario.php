@@ -1,57 +1,78 @@
 <?php
-    require 'connection.php';
+require 'connection.php';
 
-    $email = $_POST["emailUsuario"];
-    $senha = $_POST['senhaUsuario'];
-    $nickname = $_POST['nickname'];
+// lê os dados enviados pelo formulário
+$email    = $_POST["emailUsuario"] ?? '';
+$senha    = $_POST['senhaUsuario'] ?? '';
+$nickname = $_POST['nickname']     ?? '';
 
-    if ($email === '' || $senha === '' || $nickname === '') {
-        echo "Dados inválidos.";
+$email    = trim($email);
+$senha    = trim($senha);
+$nickname = trim($nickname);
+
+if ($email === '' || $senha === '' || $nickname === '') {
+    header("Location: cadastroUsuario.php?erro=campos_vazios");
+    exit;
+}
+
+// verificar se já existe usuário com esse email OU esse nickname
+$sqlCons = "
+    SELECT email, nickname 
+    FROM usuario 
+    WHERE email = :email OR nickname = :nickname
+";
+$stmtCons = $conn->prepare($sqlCons);
+$stmtCons->bindValue(':email', $email);
+$stmtCons->bindValue(':nickname', $nickname);
+$stmtCons->execute();
+
+$usuarioExistente = $stmtCons->fetch(PDO::FETCH_ASSOC);
+
+if ($usuarioExistente) {
+
+    if ($usuarioExistente['email'] === $email) {
+        header("Location: cadastroUsuario.php?erro=email");
         exit;
     }
 
-    $sqlCons = "select email, nickname from usuario where email = :email";
-    $stmtCons = $conn->prepare($sqlCons);
-    $stmtCons->bindValue(':email', $email);
-    $stmt->bindValue(':nickname', $nickname);
-    $stmtCons->execute();
-
-    $usuarioExistente = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($usuarioExistente) {
-
-        if ($usuarioExistente['email'] === $email) {
-            header("Location: cadastroUsuario.php?erro=email");
-            exit;
-        }
-
-        if ($usuarioExistente['nickname'] === $nickname) {
-            header("Location: cadastroUsuario.php?erro=nickname");
-            exit;
-        }
+    if ($usuarioExistente['nickname'] === $nickname) {
+        header("Location: cadastroUsuario.php?erro=nickname");
+        exit;
     }
+}
 
-    $row = $stmtCons->fetch(PDO::FETCH_ASSOC);
+// insere usuário
+$sql = "INSERT INTO usuario (email, senha, nickname) 
+        VALUES (:email, :senha, :nickname)";
+$stmt = $conn->prepare($sql);
+$stmt->bindParam(':email', $email);
+$stmt->bindParam(':senha', $senha);      // depois a gente troca pra password_hash
+$stmt->bindParam(':nickname', $nickname);
 
-    if($row){
-        echo'usuario ' . $row['email'] . ' já existente'; exit;
-    }
+if ($stmt->execute()) {
+    // NÃO redireciona mais: mostra mensagem + botão
+    ?>
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cadastro realizado</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="caixacadastro">
+            <h1>Usuário cadastrado com sucesso!</h1>
+            <p>Seu cadastro foi realizado. Clique no botão abaixo para ir para a tela de login.</p>
 
-    else{
-
-        $sql = "INSERT INTO usuario (email, senha, nickname) VALUES (:email, :senha, :nickname)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':senha', $senha);
-        $stmt->bindParam(':nickname',$nickname);
-
-        if ($stmt->execute()) {
-            echo "<p style='color:green;'>Usuário cadastrado com sucesso!</p>";
-            header("Location: TelaInicial.php");
-            exit;
-        } else {
-            echo "<p style='color:red;'>Erro ao cadastrar usuário.</p>";
-        }
-        
-    }
-?>
+            <form action="TelaInicial.php" method="get">
+                <button type="submit" class="botao">Ir para login</button>
+            </form>
+        </div>
+    </body>
+    </html>
+    <?php
+    exit;
+} else {
+    header("Location: cadastroUsuario.php?erro=desconhecido");
+    exit;
+}

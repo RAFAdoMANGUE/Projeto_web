@@ -6,9 +6,11 @@ $user = 'postgres';
 $password = 'admin';
 
 try {
+    // Conexão no banco padrão "postgres" para criar o Projeto_final
     $pdoAdmin = new PDO("pgsql:host=$host;port=$port;dbname=postgres;", $user, $password);
     $pdoAdmin->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // Cria o banco Projeto_final (se não existir)
     try {
         $sqlCreateDb = 'CREATE DATABASE "Projeto_final"';
         $pdoAdmin->exec($sqlCreateDb);
@@ -21,9 +23,11 @@ try {
         }
     }
 
+    // Conecta no banco Projeto_final
     $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // Tabela LIGA
     $sqlLiga = "
         CREATE TABLE IF NOT EXISTS liga (
             id SERIAL PRIMARY KEY,
@@ -35,6 +39,7 @@ try {
     $pdo->exec($sqlLiga);
     echo "Tabela 'liga' criada.<br>";
 
+    // Tabela USUARIO
     $sqlUsuario = "
         CREATE TABLE IF NOT EXISTS usuario (
             id SERIAL PRIMARY KEY,
@@ -52,6 +57,7 @@ try {
     $pdo->exec($sqlUsuario);
     echo "Tabela 'usuario' criada.<br>";
 
+    // Tabela PARTIDA (já com id_liga)
     $sqlPartida = "
         CREATE TABLE IF NOT EXISTS partida (
             id SERIAL PRIMARY KEY,
@@ -60,32 +66,73 @@ try {
             tempo_restante INT,
             vidas_restantes INT,
             data_partida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            id_liga INT NULL,
             CONSTRAINT fk_partida_usuario
                 FOREIGN KEY (id_usuario)
                 REFERENCES usuario(id)
                 ON DELETE CASCADE
         );
     ";
-
-    $sqlPontuacao = "
-    CREATE TABLE IF NOT EXISTS pontuacao (
-        id SERIAL PRIMARY KEY,
-        id_usuario INT NOT NULL UNIQUE,
-        pontos INT NOT NULL DEFAULT 0,
-        atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        CONSTRAINT fk_pontuacao_usuario
-            FOREIGN KEY (id_usuario)
-            REFERENCES usuario(id)
-            ON DELETE CASCADE
-    );
-";
-$pdo->exec($sqlPontuacao);
-echo "Tabela 'pontuacao' criada.<br>";
-
     $pdo->exec($sqlPartida);
     echo "Tabela 'partida' criada.<br>";
 
-    echo "<br>Banco e tabelas criados.";
+    // Garante que a coluna id_liga exista em 'partida' (caso a tabela seja antiga)
+    $sqlCheckCol = "
+        SELECT 1
+        FROM information_schema.columns
+        WHERE table_name = 'partida'
+          AND column_name = 'id_liga';
+    ";
+    $stmtCheckCol = $pdo->query($sqlCheckCol);
+    $colExiste = $stmtCheckCol->fetchColumn();
+
+    if (!$colExiste) {
+        // Adiciona a coluna se não existir
+        $sqlAddCol = "ALTER TABLE partida ADD COLUMN id_liga INT NULL;";
+        $pdo->exec($sqlAddCol);
+        echo "Coluna 'id_liga' adicionada à tabela 'partida'.<br>";
+    }
+
+    // Garante a FK de partida.id_liga -> liga(id), se ainda não existir
+    $sqlCheckFk = "
+        SELECT 1
+        FROM information_schema.table_constraints
+        WHERE table_name = 'partida'
+          AND constraint_type = 'FOREIGN KEY'
+          AND constraint_name = 'fk_partida_liga';
+    ";
+    $stmtCheckFk = $pdo->query($sqlCheckFk);
+    $fkExiste = $stmtCheckFk->fetchColumn();
+
+    if (!$fkExiste) {
+        $sqlAddFk = "
+            ALTER TABLE partida
+            ADD CONSTRAINT fk_partida_liga
+            FOREIGN KEY (id_liga)
+            REFERENCES liga(id)
+            ON DELETE SET NULL;
+        ";
+        $pdo->exec($sqlAddFk);
+        echo "Constraint 'fk_partida_liga' criada na tabela 'partida'.<br>";
+    }
+
+    // Tabela PONTUACAO
+    $sqlPontuacao = "
+        CREATE TABLE IF NOT EXISTS pontuacao (
+            id SERIAL PRIMARY KEY,
+            id_usuario INT NOT NULL UNIQUE,
+            pontos INT NOT NULL DEFAULT 0,
+            atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            CONSTRAINT fk_pontuacao_usuario
+                FOREIGN KEY (id_usuario)
+                REFERENCES usuario(id)
+                ON DELETE CASCADE
+        );
+    ";
+    $pdo->exec($sqlPontuacao);
+    echo "Tabela 'pontuacao' criada.<br>";
+
+    echo "<br>Banco e tabelas criados/migrados.";
 } catch (PDOException $e) {
     echo "Erro: " . $e->getMessage();
 }

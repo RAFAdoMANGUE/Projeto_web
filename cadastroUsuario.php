@@ -22,9 +22,9 @@
             <button type="submit" class="botao">Cadastrar</button>
         </form>
 
-        <div>
-            <a href="TelaInicial.php" class="botao-link">Ir para Login</a>
-        </div>
+            <form action="TelaInicial.php" method="get">
+                <button type="submit" class="botao">Ir para login</button>
+            </form>
     </div>
 </body>
 </html>

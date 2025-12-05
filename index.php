@@ -9,7 +9,7 @@
     <div class="caixa">
         <h1>Cadastro</h1>
 
-        <form action="salvar.php" method="POST">
+        <form action="salvarUsuario.php" method="POST">
             <label for="email">E-mail</label>
             <input type="email" id="email" name="emailUsuario" required>
 
