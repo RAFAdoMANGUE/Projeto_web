@@ -82,7 +82,8 @@ $ligas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
 
     <br>
-    <a href="home.php"><button>Voltar</button></a>
-</div>
+                    <div class="acoesliga">
+                    <a href="home.php" class="botao-liga">Voltar</a>
+                    </div>
 </body>
 </html>

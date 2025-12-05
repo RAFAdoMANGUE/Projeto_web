@@ -5,7 +5,6 @@ session_start();
 $nome = trim($_POST['nome'] ?? '');
 $descricao = trim($_POST['descricao'] ?? '');
 
-// validação
 if ($nome === '') {
     header("Location: cadastroLigas.php?erro=nome_vazio");
     exit;
@@ -23,7 +22,6 @@ try {
 
 } catch (PDOException $e) {
 
-    // código 23505 = chave única violada
     if ($e->getCode() === "23505") {
         header("Location: cadastroLigas.php?erro=duplicada");
         exit;

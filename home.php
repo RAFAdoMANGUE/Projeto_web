@@ -10,33 +10,22 @@ if (!isset($_SESSION['id_usuario'])) {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>joguinho explosivo</title>
+    <title>Menu</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="caixa">
         <h1>Menu</h1>
 
-        <div>
-            <ul>
-                <li><b><a href="jogo.php">Jogar</a></b></li>
-            </ul>
-            <ul>
-                <li><b><a href="pontuacaogeral.php">Pontuação geral</a></b></li>
-            </ul>
-            <ul>
-                <li><b><a href="cadastroLigas.php">Cadastrar liga</a></b></li>
-            </ul>
-            <ul>
-                <li><b><a href="tabelaLigas.php">Tabela liga</a></b></li>
-            </ul>
-            <ul>
-                <li><b><a href="historico.php">Historico de jogos</a></b></li>
-            </ul>
-            <ul>
-            <li><b><a href="logout.php">Sair</a></b></li>
-            </ul>   
+        <div class="menu-simples">
+        <a href="jogo.php" class="link-menu">Jogar</a>
+        <a href="pontuacaogeral.php" class="link-menu">Pontuação geral</a>
+        <a href="cadastroLigas.php" class="link-menu">Cadastrar liga</a>
+        <a href="tabelaLigas.php" class="link-menu">Tabela liga</a>
+        <a href="historico.php" class="link-menu">Histórico de jogos</a>
+        <a href="logout.php" class="link-menu">Sair</a>
         </div>
+
     </div>
 </body>
 </html>
