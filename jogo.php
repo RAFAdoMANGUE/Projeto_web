@@ -20,7 +20,7 @@
         </div>
 
         <p>Palavra atual:</p>
-        <p><strong id="palavra-atual">exemplo</strong></p>
+        <p><strong id="palavra-atual"></strong></p>
 
         <input type="text" id="entrada-palavra" placeholder="Digite aqui...">
         <br>
