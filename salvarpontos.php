@@ -22,7 +22,6 @@ $idUsuario = (int) $_SESSION['id_usuario'];
 try {
     $conn->beginTransaction();
 
-    // grava histórico da partida
     $sqlPartida = "
         INSERT INTO partida (id_usuario, pontos, tempo_restante, vidas_restantes)
         VALUES (:id_usuario, :pontos, :tempo_restante, :vidas_restantes)
@@ -34,7 +33,6 @@ try {
     $stmtPartida->bindValue(':vidas_restantes', $vidas_restantes, PDO::PARAM_INT);
     $stmtPartida->execute();
 
-    // atualiza melhor pontuação do jogador (ranking geral)
     $sqlPontuacao = "
         INSERT INTO pontuacao (id_usuario, pontos)
         VALUES (:id_usuario, :pontos)

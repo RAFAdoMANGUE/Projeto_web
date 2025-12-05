@@ -47,7 +47,6 @@ $ranking = $stmt->fetchAll(PDO::FETCH_ASSOC);
            <tbody>
             <?php
             if (empty($ranking)) {
-                // Nenhum resultado encontrado
                 echo '<tr><td colspan="3" class="centro">Nenhuma pontuação encontrada</td></tr>';
             } else {
                 $posicao = 1;

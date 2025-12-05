@@ -1,7 +1,6 @@
 <?php
 require 'connection.php';
 
-// lê os dados enviados pelo formulário
 $email    = $_POST["emailUsuario"] ?? '';
 $senha    = $_POST['senhaUsuario'] ?? '';
 $nickname = $_POST['nickname']     ?? '';
@@ -15,7 +14,6 @@ if ($email === '' || $senha === '' || $nickname === '') {
     exit;
 }
 
-// verificar se já existe usuário com esse email OU esse nickname
 $sqlCons = "
     SELECT email, nickname 
     FROM usuario 
@@ -41,7 +39,6 @@ if ($usuarioExistente) {
     }
 }
 
-// insere usuário
 $sql = "INSERT INTO usuario (email, senha, nickname) 
         VALUES (:email, :senha, :nickname)";
 $stmt = $conn->prepare($sql);

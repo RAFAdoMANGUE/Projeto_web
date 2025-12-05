@@ -15,7 +15,6 @@ if ($idLiga <= 0) {
     exit;
 }
 
-// Remove o vínculo do usuário com a liga
 $sql = "UPDATE usuario SET id_liga = NULL WHERE id = :id_usuario";
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(':id_usuario', $idUsuario, PDO::PARAM_INT);

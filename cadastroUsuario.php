@@ -18,13 +18,14 @@
 
             <label for="nickname">Nickname</label>
             <input type="text" id="nickname" name="nickname" required>
-
-            <button type="submit" class="botao">Cadastrar</button>
+    
+            <div class="acoes">
+                <button type="submit" class="botao">Cadastrar</button>
         </form>
-
-            <form action="TelaInicial.php" method="get">
+                <form action="TelaInicial.php" method="get">
                 <button type="submit" class="botao">Ir para login</button>
             </form>
     </div>
+
 </body>
 </html>
