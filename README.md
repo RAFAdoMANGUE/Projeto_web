@@ -1,4 +1,10 @@
 # Jogo da Explosão – README
+# TRABALHO REALIZADO POR:
+# Gabriel Rodrigues Simas
+# Dancleve Rafael de Oliveira Nascimento
+# Rafael Maldonado Caetano
+# Vinícius Henrique Fredrich
+
 
 Bem-vindo ao **Joguinho da Explosão**!  
 Este é um jogo de digitação em que você precisa escrever as palavras corretas o mais rápido possível para marcar pontos antes que a bomba alcance o final da tela e exploda.
